@@ -1,0 +1,90 @@
+alignment top_left
+background yes
+border_width 0
+default_color ffffff
+double_buffer yes
+draw_borders no
+draw_outline no
+draw_shades yes
+gap_x 0
+gap_y 0
+maximum_width 1600
+minimum_size 1600 900
+no_buffers yes
+override_utf8_locale yes
+own_window yes 
+own_window_title conky
+own_window_hints below,sticky,skip_taskbar,skip_pager,undecorated
+own_window_transparent yes 
+own_window_colour 000000
+own_window_type override
+own_window_class conky
+# own_window_argb_visual yes
+# own_window_argb_value 80
+text_buffer_size 8000
+total_run_times 0
+update_interval 1.0
+uppercase no
+use_xft yes
+xftalpha 1
+xftfont Freesans:pixelsize=9
+
+lua_load ~/.aek6/conky/bargraph_small.lua
+lua_draw_hook_pre main_bars
+# lua_draw_hook_post draw_bg
+
+TEXT
+#============================  BACKGROUNDS  ====================================
+#
+#--------------------------------  TIME  ---------------------------------------
+${image ~/.aek6/scripts/img/fondo-conky.png -p 0,35 -s 600x180}\
+#-------------------------------  SYSTEM  --------------------------------------
+${image ~/.aek6/scripts/img/fondodark-conky.png -p 0,870 -s 1600x30}\
+#------------------------------  CALENDAR  -------------------------------------
+${image ~/.aek6/scripts/img/fondoredondeado-conky.png -p 30,620 -s 235x200}\
+#------------------------------  IMAGENBG  -------------------------------------
+${execpi 2 ~/.aek6/conky/imagebg}\
+#
+#
+${voffset 40}\
+#================================  TIME  =======================================
+${offset 200}${font Raleway:weight=Light:size=100}${time %I:%M}${font}
+${voffset 20}${offset 160}${font Raleway:weight=Light:size=30} ${time %A %d %B}${font}
+#==============================  SYSTEM  =======================================
+${voffset 690}\
+#-------------------------------  CPU  -----------------------------------------
+#${cpubar cpu1 5, 80}${cpubar cpu2 5, 80}${cpubar cpu3 5, 80}${cpubar cpu4 5, 80}\
+#-------------------------------  RAM  -----------------------------------------
+#${offset 10}${membar 5, 100}\
+#-------------------------------  RED  -----------------------------------------
+#${offset 10}${wireless_link_bar 5, 100 wlp2s0}
+#
+#----------------------------  TEXT CPU  ---------------------------------------
+${font Ubuntu:pixelsize=10}${offset 35}CPU 1${offset 53}CPU 2\
+${offset 53}CPU 3${offset 53}CPU 4\
+#----------------------------  TEXT RAM  ---------------------------------------
+${offset 110}RAM${font}\
+#----------------------------  TEXT RED  ---------------------------------------
+${offset 180}${color2}WIFI${font}\
+#---------------------------  TEXT DISCO  --------------------------------------
+${voffset -12}${offset 138}${color2}Raiz${font}\
+${voffset 12}${offset -22}${color2}Home${font}
+#
+#
+#===============================  CALENDAR  ====================================
+${voffset -265}\
+# ${voffset 16}${font DroidSansMono:size=12}${color3}${alignc 450}${time %A}${font} 
+# ${voffset -4}\
+# ${if_match ${time %e}<=9}\
+#     ${font DroidSansFallback:bold:size=28}${color4}${alignc 455}${time %e}${font}\
+# ${else}\
+#     ${font DroidSansFallback:bold:size=28}${color4}${alignc 450}${time %e}${font}\
+# ${endif}  
+# ${voffset 0}${font DroidSansMono:size=12}${color3}${alignc 450}${time %B}${font}  
+# ${voffset 0}${font DroidSansMono:size=13}${color3}${alignc 450}${time %Y}${font}  
+${offset 50}${font DroidSansMono:size=15}${time %B}
+## Uncomment the following line for Conky 1.8.0 ##  
+${voffset 15}${font DroidSansMono:size=12}${color #FFFFFF}\
+${execpi 60 VinDSL_Cal_6=`date +%d`;cal|sed -e'1,1d' -e's/^/${offset 45}/' -e's/'$VinDSL_Cal_6'/${color #FF0000}&${color #FFFFFF}/'}${font}  
+## Uncomment the following line for Conky 1.8.1 ##  
+## ${voffset -75}${offset 100}${font DroidSansMono:size=7.55}${color3}${execpi 60 VinDSL_Cal_6=`date +%d`;cal|sed -e'1,1d' -e's/'$VinDSL_Cal_6'/${color4}&${color3}/'}${font}  

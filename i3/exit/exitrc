@@ -1,0 +1,29 @@
+[settings]
+usehal = false
+
+[looks]
+opacity = 70
+bgcolor = black
+buttontheme = oxygen
+buttons = cancel, logout, restart, shutdown, suspend, lock
+#, hibernate
+
+[shortcuts]
+cancel = Escape
+shutdown = A
+restart = R
+suspend = S
+logout = C
+lock = B
+#hibernate = H
+
+[commands]
+shutdown = shutdown -h now  #systemctl poweroff
+restart = reboot #systemctl reboot
+suspend = dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend
+#hibernate = dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Hibernate
+logout = i3-msg exit
+lock = $HOME/.aek6/i3/i3-lock.sh
+#switchuser = gdm-control --switch-user
+#safesuspend = safesuspend
+

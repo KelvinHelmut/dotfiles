@@ -1,0 +1,11 @@
+#!/bin/sh
+
+texto="aek6 System"
+while [[ $texto != "" ]]; do
+    keychain -Q -q ~/.ssh/id_rsa 2> ~/.null
+    texto=`cat ~/.null`
+done
+rm ~/.null
+
+[ -f ~/.keychain/$HOSTNAME-sh ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
+[ -f ~/.keychain/$HOSTNAME-sh-gpg ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null

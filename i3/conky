@@ -1,0 +1,155 @@
+out_to_x no
+out_to_console yes
+short_units yes
+update_interval 1
+
+TEXT
+[\
+{"icon":"/home/maigo/.aek6/i3/icon-xbm/original/note.xbm","icon_color":"\#EEE8D5",\
+"full_text" : ${if_mpd_playing} "", "color" : "\#EEE8D5", "separator" : false, "separator_block_width" : 3 },\
+    {"full_text" : "${mpd_artist 20} - ${mpd_title 30}   ${mpd_elapsed} / ${mpd_length}"${else}""${endif}, "color" : "\#268BD2", "min_width" : 400, "separator" : false, "separator_block_width" : 3 },\
+# Kernel:
+#{"full_text":"ⓚ","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"${kernel}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+# CPU temperature:
+# {"full_text":"τ","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+{"full_text":"${if_match ${hwmon 0 temp 1}<45}","color":"\#AAF096","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/temp.xbm",\
+    "full_text":"${hwmon 0 temp 1}","color":"\#AAF096","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${hwmon 0 temp 1}<50}","color":"\#F0DC64","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/temp.xbm",\
+    "full_text":"${hwmon 0 temp 1}","color":"\#F0DC64","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${hwmon 0 temp 1}<55}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/temp.xbm",\
+    "full_text":"${hwmon 0 temp 1}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${hwmon 0 temp 1}>=55}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/temp.xbm",\
+    "full_text":"${hwmon 0 temp 1}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${endif}${endif}${endif}${endif}"},\
+{"full_text":"°C","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+# Download:
+# {"full_text":"", "color":"\#888888", "separator":false, "separator_block_width":6},\
+#
+{"full_text":"${if_match ${downspeedf wlp2s0}<100}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_down_03.xbm",\
+    "full_text":"${downspeed wlp2s0}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${downspeedf wlp2s0}<300}","color":"\#68B1E8","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_down_03.xbm",\
+    "full_text":"${downspeed wlp2s0}","color":"\#68B1E8","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${downspeedf wlp2s0}<700}","color":"\#DB70B8","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_down_03.xbm",\
+    "full_text":"${downspeed wlp2s0}","color":"\#DB70B8","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${downspeedf wlp2s0}<1000}","color":"\#9470DB","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_down_03.xbm",\
+    "full_text":"${downspeed wlp2s0}","color":"\#9470DB","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${downspeedf wlp2s0}>=1000}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_down_03.xbm",\
+    "full_text":"${downspeed wlp2s0}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+{"full_text":"${endif}${endif}${endif}${endif}${endif}"},\
+#
+# Upload:
+# {"full_text":"","color":"\#888888","separator":false},\
+#
+{"full_text":"${if_match ${upspeedf wlp2s0}<15}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_up_03.xbm",\
+    "full_text":"${upspeed wlp2s0}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${upspeedf wlp2s0}<35}","color":"\#9470DB","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_up_03.xbm",\
+    "full_text":"${upspeed wlp2s0}","color":"\#9470DB","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${upspeedf wlp2s0}>=35}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/net_up_03.xbm",\
+    "full_text":"${upspeed wlp2s0}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+{"full_text":"${endif}${endif}${endif}"},\
+#
+# Memory:
+# {"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+{"full_text":"${if_match ${memperc}<30}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mem.xbm",\
+    "full_text":"${memeasyfree}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${memperc}<60}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mem.xbm",\
+    "full_text":"${memeasyfree}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${memperc}<85}","color":"\#FF9933","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mem.xbm",\
+    "full_text":"${memeasyfree}","color":"\#FF9933","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${memperc}>=85}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mem.xbm",\
+    "full_text":"${memeasyfree}","color":"\#FF3333","separator":false,"separator_block_width":6},\
+{"full_text":"${endif}${endif}${endif}${endif}"},\
+#
+# CPU:
+# {"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+{"full_text":"${if_match ${cpu cpu0}<25}","color":"\#AAF096","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/cpu.xbm",\
+    "full_text":"${cpu cpu0}","color":"\#AAF096","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${cpu cpu0}<50}","color":"\#F0DC64","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/cpu.xbm",\
+    "full_text":"${cpu cpu0}","color":"\#F0DC64","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${cpu cpu0}<75}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/cpu.xbm",\
+    "full_text":"${cpu cpu0}","color":"\#FF9933","separator":false,"separator_block_width":0},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${cpu cpu0}<=100}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/cpu.xbm",\
+    "full_text":"${cpu cpu0}","color":"\#FF3333","separator":false,"separator_block_width":0},\
+{"full_text":"${endif}${endif}${endif}${endif}"},\
+{"full_text":"%","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+#
+# Weather:
+#{"full_text":"☂","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"${execi 300 ~/.aek6/scripts/weather.sh "EUR|UK|UK241|LONDON"}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+#
+# Mail:
+# {"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+{"full_text":"${if_match ${execpi 60 python2 ~/.aek6/scripts/gmail.py}<=0}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm",\
+    "full_text":"${execpi 60 python2 ~/.aek6/scripts/gmail.py}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${execpi 60 python2 ~/.aek6/scripts/gmail.py}<=2}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm",\
+    "full_text":"${execpi 60 python2 ~/.aek6/scripts/gmail.py}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
+{"full_text":"${else}"},\
+{"full_text":"${if_match ${execpi 60 python2 ~/.aek6/scripts/gmail.py}>2}","color":"\#FF9933","separator":false,"separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm",\
+    "full_text":"${execpi 60 python2 ~/.aek6/scripts/gmail.py}","color":"\#FF9933","separator":false,"separator_block_width":6},\
+{"full_text":"${endif}${endif}${endif}"},\
+#
+# Battery:
+#{"full_text":"ⓑ","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"${battery_percent}%","color":"\#EEEEEE","separator":false},\
+# Volume:
+#{"full_text":"ⓥ","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"${execi 1 amixer sget Master,0 | egrep -o '([0-9]+%|\[(on|off)\])' | sed ':a;N;$!ba;s/\n/ /g'}","color":"\#EEEEEE","separator":false},\
+#
+# Date:
+# {"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+{"full_text":"   ${time %A, %d de %B}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+#
+# Time:
+#{"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
+#
+{"icon":"/home/maigo/.aek6/i3/icon-xbm/original/clock.xbm", "full_text":"${time %I:%M%P}","color":"\#EEEEEE","separator":false},\
+{"full_text":"|", "color":"\#666666", "separator":false}\
+],
+
+
