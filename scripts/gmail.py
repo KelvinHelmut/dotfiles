@@ -4,7 +4,7 @@ import os
 #Enter your username and password below within double quotes
 # eg. username="username" and password="password"
 username="aek6.io"
-password="aek6G+emina"
+password="password"
 com="wget -q -O - https://"+username+":"+password+"@mail.google.com/mail/feed/atom --no-check-certificate"
 
 temp=os.popen(com)
