@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+$path = `echo \$HOME`;
+chomp($path);
+
+$namebg = `cat  $path/.fehbg`;
+@data = split(" ", $namebg);
+$namebg = substr($data[2], 1, length($data[2]) - 2);
+$path = $path . "/Imágenes/Fondos/" . $namebg;
+
+$size = `identify $path`;
+@data = split(" ", $size);
+$size = $data[2];
+$w = substr($size, 0, index($size, "x"));
+$h = substr($size, index($size, "x") + 1);
+
+$new_h = 225;       # Nueva altura de la imágen.
+$scale = $h / $new_h;
+$w /= $scale;
+$h = $new_h;
+
+$border = 4;        # Borde de la imagen.
+$x = 1570 - $w;     # Punto (x, y) de la pantalla donde iniciará
+$y = 720 - $h;      # la esquina inferior derecha de la imágen.
+
+print "\${image ~/.aek6/scripts/img/fondo2-conky.png -p " . ($x - $border) . "," . ($y - $border) . " -s " . ($w + $border * 2) . "x" . ($h + $border * 2) . "}\${image $path -p $x,$y -s $w" . "x" . "$h}\\";

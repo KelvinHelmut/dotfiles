@@ -43,7 +43,7 @@ ${image ~/.aek6/scripts/img/fondodark-conky.png -p 0,870 -s 1600x30}\
 #------------------------------  CALENDAR  -------------------------------------
 ${image ~/.aek6/scripts/img/fondoredondeado-conky.png -p 30,620 -s 235x200}\
 #------------------------------  IMAGENBG  -------------------------------------
-${execpi 2 ~/.aek6/conky/imagebg}\
+${execpi 2 ~/.aek6/scripts/imagebgconky}\
 #
 #
 ${voffset 40}\
