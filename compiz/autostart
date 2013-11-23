@@ -1,0 +1,27 @@
+#! /bin/sh
+
+#DAEMONS
+wicd-client --tray &
+thunar --daemon &
+#xscreensaver -no-splash &
+mpd --no-daemon &
+clipit --daemon &
+volumeicon &
+synapse --startup &
+#xss-lock /home/maigo/.aek6/i3/i3-lock.sh &
+
+#ESCRITORIO
+# ~/.aek6/scripts/wallpaper2.sh &
+# (sleep 10 && avant-window-navigator) &
+(sleep 7 && tint2 -c ~/.aek6/compiz/tint2/tray.tint2rc) &
+(sleep 7 && tint2 -c ~/.aek6/compiz/tint2/reloj.tint2rc) &
+(sleep 7 && tint2 -c ~/.aek6/compiz/tint2/izquierda.tint2rc) &
+(sleep 7 && tint2 -c ~/.aek6/compiz/tint2/derecha.tint2rc) &
+(sleep 10 && cairo-dock) &
+#(sleep 10 && ~/.screenlets/Slideshow/SlideshowScreenlet.py) &
+conky -c ~/.aek6/compiz/conky &
+# conky -c /home/maigo/.aek6/conky/full &
+
+#APLICACIONES
+(sleep 17 && pidgin) &
+

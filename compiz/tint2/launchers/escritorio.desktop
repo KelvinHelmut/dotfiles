@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Mostrar Escritorio
+Exec=xdotool key Control+Alt+d
+Icon=/home/maigo/Imágenes/Iconos/tint2/monitor.png

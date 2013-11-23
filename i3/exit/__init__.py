@@ -322,7 +322,7 @@ class OpenboxLogout():
         button.connect("clicked", self.click_button, name)
 
         #nombre para los botones
-        nombres = {'cancel':'[ESC]Cancelar', 'logout':'[C]errar sesion', 'restart':'[R]einiciar', 'shutdown':'[A]pagar', 'suspend':'[S]uspender', 'lock':'[B]loquear', 'hibernate':'[H]ibernar'}
+        nombres = {'cancel':'Cancelar', 'logout':'Cerrar sesion', 'restart':'Reiniciar', 'shutdown':'Apagar', 'suspend':'Suspender', 'lock':'Bloquear', 'hibernate':'Hibernar'}
 
         label = gtk.Label((nombres[name]))
         label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))

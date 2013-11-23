@@ -1,0 +1,6 @@
+#! /usr/bin/sh
+user="user"
+password="password"
+
+correos=`wget -q -O - https://$user:$password@mail.google.com/mail/feed/atom --no-check-certificate | grep -o '<fullcount>.*</fullcount>' | grep -o '[0-9]*'`
+echo $correos > $HOME/.correo_sin_leer

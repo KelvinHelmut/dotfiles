@@ -1,0 +1,20 @@
+#! /bin/sh
+
+#DAEMONS
+# wicd-client --tray &
+nm-applet &
+thunar --daemon &
+mpd --no-daemon &
+clipit --daemon &
+synapse --startup &
+#xss-lock /home/maigo/.aek6/i3/i3-lock.sh &
+
+#ESCRITORIO
+conky -c /home/maigo/.aek6/conky/full &
+
+#APLICACIONES
+(sleep 17 && pidgin) &
+
+#NOTIFICACIONES
+
+

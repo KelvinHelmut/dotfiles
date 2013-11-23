@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# ~/.xinitrc
+#
+# Executed by startx (run your window manager from here)
+
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+# exec gnome-session
+# exec startkde
+# exec startxfce4
+# ...or the Window Manager of your choice
+
+numlockx &
+xrdb -merge ~/.Xresources
+#xcompmgr &
+hsetroot -solid "#000000"
+compton --config $HOME/.aek6/compton.conf -b
+xss-lock -- $HOME/.aek6/i3/i3-lock.sh &
+#~/.iniciando-aek6System &
+
+# ----
+.aek6/scripts/key
+# keychain ~/.ssh/id_rsa_H
+# [ -f ~/.keychain/$HOSTNAME-sh ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
+# [ -f ~/.keychain/$HOSTNAME-sh-gpg ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
+exec i3

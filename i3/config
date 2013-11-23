@@ -50,6 +50,7 @@ set $WS5 5
 set $WS6 6
 set $WS7 7
 set $WS8 8
+set $WS9 9
 #--------------------------------------------
 
 # WINDOW CONTROL
@@ -63,6 +64,7 @@ for_window [title="TrueCrypt"] floating enable
 #for_window [title="Browser"] floating enable
 # for_window [title="Catfish"] floating enable
 for_window [title="Progreso de operación de archivo" class="Thunar"] floating enable
+for_window [title="Operaciones con archivos" class="Marlin"] floating enable
 for_window [title="Comparte un enlace en Twitter - Mozilla Firefox" class="Firefox"] floating enable
 for_window [title="Press This - Mozilla Firefox" class="Firefox"] floating enable
 for_window [title="Preferences"] floating enable
@@ -84,17 +86,19 @@ for_window [title="tilda"] floating disable
 for_window [class="Gpicview"] floating enable
 for_window [class="Synapse"] border none floating enable
 for_window [class="XCalc"] floating enable
+for_window [title="Eclipse |Eclipse" class="Java"] floating enable
 #for_window [class="[.]*"] floating enable
 #assign [class="mplayer2"] $WS4
 assign [class="VirtualBox"] $WS6
 assign [class="libreoffice*|Evince"] $WS7
-assign [class="Sylpheed"] $WS8
-assign [instance="VCLSalFrame"] $WS7
+# assign [class="Sylpheed"] $WS8
+# assign [instance="VCLSalFrame"] $WS7
 ## BROWSER ASSIGNMENT (Navigator=Iceape)
 assign [instance="Navigator|chromium|filezilla|transmission-gtk|google-chrome"] $WS2
 #for_window [class="URxvt"] floating enable
 #for_window [class="URxvt"] border 1pixel
 assign [class="Gimp|Eclipse|Pinta|Blender|Catfish|Galculator"] $WS5
+assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
 #for_window [class="Thunar"] floating enable
 assign [instance="mousepad|leafpad|geany"] $WS3
 #assign [instance="terminator|urxvt"] $WS1
@@ -103,8 +107,9 @@ assign [instance="syncbackup|bleachbit|caffeine|gparted|hardinfo|truecrypt"] $WS
 #for_window [class="Mousepad"] floating enable #assign [class="Turpial" ] $WS4
 #for_window [class="Turpial" ] floating enable
 assign [class="Geary|Liferea|Pidgin|Skype"] $WS8
+assign [class="JDownloader"] $WS9
 
-bindsym $mod+Tab focus right
+bindsym Mod1+Tab focus right
 
 
 
@@ -151,10 +156,10 @@ bindsym $mod+f fullscreen
 bindsym $mod+i layout toggle 
 
 # toggle tiling / floating
-bindsym Mod1+space floating toggle
+bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym Mod1+Tab focus mode_toggle
+bindsym $mod+Tab focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -254,14 +259,14 @@ bar {
 #       font pango:fixed 6
         font pango:Convergence 10px
   colors {
-        statusline      #999999
-        background      #333333
+        statusline      #8e8100
+        background      #222222
        
 # class                         border          backgrd         text
-        focused_workspace  #000000              #000000         #dddddd
-        active_workspace   #333333              #333333         #696f89
-        inactive_workspace #333333              #333333         #777777
-        urgent_workspace   #333333              #333333         #afd700
+        focused_workspace  #222222              #222222         #00ddff
+        active_workspace   #222222              #222222         #696f89
+        inactive_workspace #222222              #222222         #777777
+        urgent_workspace   #000000              #000000         #afd700
    }
 }
 
@@ -288,13 +293,16 @@ bar {
 # imagen de fondo
 exec --no-startup-id sh ~/.aek6/scripts/wallpaper2.sh
 
+# Correo gmail
+exec --no-startup-id ~/.aek6/scripts/gmail.sh
+
 # iniciando daemons
-exec --no-startup-id sh ~/.iniciando-aek6System
+exec --no-startup-id ~/.aek6/i3/autostart
 
 # control de energia con dpms y el lock
-exec --no-startup-id xset dpms 300 0 0
-exec --no-startup-id xset s 180 0
-exec --no-startup-id xss-lock -- $HOME/.aek6/i3/i3-lock.sh &
+# exec --no-startup-id xset dpms 300 0 0
+# exec --no-startup-id xset s 180 0
+# exec --no-startup-id xss-lock -- $HOME/.aek6/i3/i3-lock.sh &
 
 # AGREGANDO COMANDOS
 #==============================
@@ -338,19 +346,33 @@ bindsym $mod+Shift+minus move scratchpad
 #COMANDOS PERSONALIZADOS
 #==============================
 #Aplicaciones
-bindsym $mod+e exec --no-startup-id thunar
+bindsym $mod+e exec --no-startup-id  thunar
 bindsym Mod1+Control+Delete exec --no-startup-id lxtask
 bindsym $mod+c exec --no-startup-id xcalc
+bindsym $mod+Control+c exec --no-startup-id zenity --calendar
 
-#Acciones
+# Acciones
 # control de mpd por sonata
-bindsym $mod+Control+Right exec sonata next
-bindsym $mod+Control+Left exec sonata prev
-bindsym $mod+p exec sonata play
-bindsym $mod+Shift+p exec sonata pause
+# bindsym $mod+Control+Right exec sonata next
+# bindsym $mod+Control+Left exec sonata prev
+# bindsym $mod+p exec sonata play
+# bindsym $mod+Shift+p exec sonata pause
+# Control de mpd con ncmpcpp
+bindsym $mod+Control+Right exec ncmpcpp next
+bindsym $mod+Control+Left exec ncmpcpp prev
+bindsym $mod+p exec ncmpcpp toggle
+bindsym $mod+KP_Add exec ncmpcpp volume +10
+bindsym $mod+KP_Subtract exec ncmpcpp volume -10
 # captura de pantalla usando imlib2_grab e import
 bindsym Print exec --no-startup-id $HOME/.aek6/scripts/captura_imlib2.sh
 bindsym --release $mod+Print exec --no-startup-id $HOME/.aek6/scripts/captura_import.sh
+# Parar/iniciar xset, ahorro de energia (dpms screensaver)
+bindsym Mod1+Control+e exec xset -dpms s off
+bindsym Mod1+Control+Shift+e exec xset +dpms s on
+# Control de volumen
+bindsym $mod+Control+Up exec --no-startup-id $HOME/.aek6/scripts/volumen up
+bindsym $mod+Control+Down exec --no-startup-id $HOME/.aek6/scripts/volumen down
+bindsym $mod+Control+m exec --no-startup-id $HOME/.aek6/scripts/volumen mute
 #-----------------------------
 
 

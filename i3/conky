@@ -5,12 +5,34 @@ update_interval 1
 
 TEXT
 [\
-{"icon":"/home/maigo/.aek6/i3/icon-xbm/original/note.xbm","icon_color":"\#EEE8D5",\
-"full_text" : ${if_mpd_playing} "", "color" : "\#EEE8D5", "separator" : false, "separator_block_width" : 3 },\
-    {"full_text" : "${mpd_artist 20} - ${mpd_title 30}   ${mpd_elapsed} / ${mpd_length}"${else}""${endif}, "color" : "\#268BD2", "min_width" : 400, "separator" : false, "separator_block_width" : 3 },\
 # Kernel:
 #{"full_text":"ⓚ","color":"\#888888","separator":false,"separator_block_width":6},\
 #{"full_text":"${kernel}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+#
+# Weather:
+#{"full_text":"☂","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"${execi 300 ~/.aek6/scripts/weather.sh "EUR|UK|UK241|LONDON"}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+#
+# Battery:
+#{"full_text":"ⓑ","color":"\#888888","separator":false,"separator_block_width":6},\
+#{"full_text":"${battery_percent}%","color":"\#EEEEEE","separator":false},\
+#
+# DPMS
+{"full_text":"${if_match "${exec xset q | grep 'DPMS is'}"=="  DPMS is Enabled"}", "separator":false, "separator_block_width":6},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/half.xbm","icon_color":"\#00FF00",\
+    "full_text":"", "color":"\#00AA00", "separator":false},\
+{"full_text":"${else}"},\
+#    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/half.xbm", "icon_color":"\#DD0000",
+    {"full_text":"", "color":"\#DD0000", "separator":false},\
+{"full_text":"${endif}"},\
+#
+# MPD playing
+{"full_text":"${if_mpd_playing}", "separator":false, "separator_block_width":3 },\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/note.xbm",\
+    "full_text":"${mpd_artist 20} - ${mpd_title 30}   ${mpd_elapsed} / ${mpd_length}",\
+    "color":"\#268BD2", "min_width":400, "separator":false, "separator_block_width":3 },\
+{"full_text":"${else}mpd off${endif}", "color":"\#BB0000", "min_width":400, "separator":false, "separator_block_width":3 },\
+#
 # CPU temperature:
 # {"full_text":"τ","color":"\#888888","separator":false,"separator_block_width":6},\
 #
@@ -32,6 +54,7 @@ TEXT
 {"full_text":"${else}"},\
 {"full_text":"${endif}${endif}${endif}${endif}"},\
 {"full_text":"°C","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+#
 # Download:
 # {"full_text":"", "color":"\#888888", "separator":false, "separator_block_width":6},\
 #
@@ -113,42 +136,38 @@ TEXT
 {"full_text":"${endif}${endif}${endif}${endif}"},\
 {"full_text":"%","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
 #
-# Weather:
-#{"full_text":"☂","color":"\#888888","separator":false,"separator_block_width":6},\
-#{"full_text":"${execi 300 ~/.aek6/scripts/weather.sh "EUR|UK|UK241|LONDON"}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
-#
 # Mail:
 # {"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
 #
-{"full_text":"${if_match ${execpi 60 python2 ~/.aek6/scripts/gmail.py}<=0}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+{"full_text":"${if_match ${exec cat ~/.correo_sin_leer}<=0}","color":"\#AAF096","separator":false,"separator_block_width":6},\
     {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm",\
-    "full_text":"${execpi 60 python2 ~/.aek6/scripts/gmail.py}","color":"\#AAF096","separator":false,"separator_block_width":6},\
+    "full_text":"${exec cat ~/.correo_sin_leer}","color":"\#AAF096","separator":false,"separator_block_width":6},\
 {"full_text":"${else}"},\
-{"full_text":"${if_match ${execpi 60 python2 ~/.aek6/scripts/gmail.py}<=2}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
+{"full_text":"${if_match ${exec cat ~/.correo_sin_leer}<=2}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
     {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm",\
-    "full_text":"${execpi 60 python2 ~/.aek6/scripts/gmail.py}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
+    "full_text":"${exec cat ~/.correo_sin_leer}","color":"\#F0DC64","separator":false,"separator_block_width":6},\
 {"full_text":"${else}"},\
-{"full_text":"${if_match ${execpi 60 python2 ~/.aek6/scripts/gmail.py}>2}","color":"\#FF9933","separator":false,"separator_block_width":6},\
+{"full_text":"${if_match ${exec cat ~/.correo_sin_leer}>2}","color":"\#FF9933","separator":false,"separator_block_width":6},\
     {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm",\
-    "full_text":"${execpi 60 python2 ~/.aek6/scripts/gmail.py}","color":"\#FF9933","separator":false,"separator_block_width":6},\
+    "full_text":"${exec cat ~/.correo_sin_leer}","color":"\#FF9933","separator":false,"separator_block_width":6},\
 {"full_text":"${endif}${endif}${endif}"},\
 #
-# Battery:
-#{"full_text":"ⓑ","color":"\#888888","separator":false,"separator_block_width":6},\
-#{"full_text":"${battery_percent}%","color":"\#EEEEEE","separator":false},\
 # Volume:
-#{"full_text":"ⓥ","color":"\#888888","separator":false,"separator_block_width":6},\
-#{"full_text":"${execi 1 amixer sget Master,0 | egrep -o '([0-9]+%|\[(on|off)\])' | sed ':a;N;$!ba;s/\n/ /g'}","color":"\#EEEEEE","separator":false},\
+#{"full_text":"ⓥ","color":"\#888888","separator":false,"separator_block_width":6},
+{"icon":"/home/maigo/.aek6/i3/icon-xbm/original/spkr_01.xbm", "icon_color":"\#00BBBB",\
+"full_text":"${execi 1 amixer sget Master,0 | egrep -m 1 -o '([0-9]+%)' | sed ':a;N;$!ba;s/\n/ /g'}","color":"\#00BBBB","separator":false},\
 #
 # Date:
 # {"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
 #
-{"full_text":"   ${time %A, %d de %B}","color":"\#EEEEEE","separator":false,"separator_block_width":6},\
+{"full_text":"   ${time %A, %d de %B}","color":"\#DDDDDD","separator":false,"separator_block_width":6},\
 #
 # Time:
 #{"full_text":"","color":"\#888888","separator":false,"separator_block_width":6},\
 #
 {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/clock.xbm", "full_text":"${time %I:%M%P}","color":"\#EEEEEE","separator":false},\
+#
+# separador final
 {"full_text":"|", "color":"\#666666", "separator":false}\
 ],
 
