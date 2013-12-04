@@ -4,4 +4,4 @@
 echo '{ "version": 1 }'
 echo '['
 echo '[],'
-exec conky -c $HOME/.aek6/i3/conky
+exec conky -c $HOME/.aek6/i3/conky_bar

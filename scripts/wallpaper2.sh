@@ -13,5 +13,5 @@ while true; do
     ((range)) && feh --bg-fill "${files[RANDOM % range]}"
 
     `$HOME/.aek6/scripts/imagebgconky`
-    sleep 5m
+    sleep 10m
 done

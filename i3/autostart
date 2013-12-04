@@ -1,20 +1,24 @@
 #! /bin/sh
 
-#DAEMONS
+#DAEMONS -----------------------------------------------------------------------
 # wicd-client --tray &
 nm-applet &
 thunar --daemon &
-mpd --no-daemon &
 clipit --daemon &
 synapse --startup &
 #xss-lock /home/maigo/.aek6/i3/i3-lock.sh &
 
-#ESCRITORIO
-conky -c /home/maigo/.aek6/conky/full &
 
-#APLICACIONES
-(sleep 17 && pidgin) &
-
-#NOTIFICACIONES
+#ESCRITORIO --------------------------------------------------------------------
+conky -c ~/.aek6/conky/full &
+# imagen de fondo
+~/.aek6/scripts/wallpaper2.sh &
 
 
+#NOTIFICACIONES ----------------------------------------------------------------
+# Correo gmail
+~/.aek6/scripts/gmail.sh &
+
+
+#APLICACIONES ------------------------------------------------------------------
+(sleep 15 && pidgin) &

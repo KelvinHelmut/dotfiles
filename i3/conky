@@ -19,11 +19,11 @@ TEXT
 #
 # DPMS
 {"full_text":"${if_match "${exec xset q | grep 'DPMS is'}"=="  DPMS is Enabled"}", "separator":false, "separator_block_width":6},\
-    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/half.xbm","icon_color":"\#00FF00",\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/half.xbm","icon_color":"\#00BB00",\
     "full_text":"", "color":"\#00AA00", "separator":false},\
 {"full_text":"${else}"},\
-#    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/half.xbm", "icon_color":"\#DD0000",
-    {"full_text":"", "color":"\#DD0000", "separator":false},\
+    {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/half.xbm", "icon_color":"\#DD0000",
+    "full_text":"", "color":"\#DD0000", "separator":false},\
 {"full_text":"${endif}"},\
 #
 # MPD playing
