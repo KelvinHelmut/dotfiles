@@ -2,8 +2,8 @@
 
 # arrays de windows managers
 # agregar si hay mas opciones
-wms=(i3 awesome compiz)
-xinitrc=(~/.aek6/i3/xinitrc ~/.aek6/awesome/xinitrc ~/.aek6/compiz/xinitrc)
+wms=(i3 awesome compiz herbstluftwm)
+xinitrc=(~/.aek6/i3/xinitrc ~/.aek6/awesome/xinitrc ~/.aek6/compiz/xinitrc ~/.aek6/herbstluftwm/xinitrc)
 
 
 # colores
@@ -47,32 +47,17 @@ show_menu(){
     done
     lon=$i
 
-    # lon=0
-    # for x in ${xinitrc[*]}; do
-    #     lon=$[lon + 1]
-    # done
-
-    echo -e "Elige el WM(Gestor de ventanas) que quieres iniciar"
+    echo -e "\n${YELLOW}Elige el WM(Gestor de ventanas) que quieres iniciar:"
     echo -e $RED$borde
     echo -e $opciones
     echo -e $RED$borde
-    echo -e "\n${YELLOW}Dame el numero de tu opción: "
+    echo -e "\n${YELLOW}Dame el numero de tu opción: ${NORMAL}"
     read opt
-
-    # if [ $opt -gt 0 ]; then
-    #     if [ $opt -le $lon ]; then
-    #         echo ${xinitrc[$opt - 1]}
-    #     fi
-    # fi
-    # if ((opt > 0 && opt < lon))
-    # then
-    #      echo ${xinitrc[$opt - 1]}
-    # fi
 
     i=1
     for x in ${xinitrc[*]}; do
         if [ $opt == $i ]; then
-             echo ${xinitrc[$opt - 1]}
+             # echo ${xinitrc[$opt - 1]}
             ln -fs ${xinitrc[$opt - 1]} ~/.xinitrc;
             exit 0;
         fi
@@ -82,7 +67,7 @@ show_menu(){
 
 iniciar(){
     clear
-    ascii_img
+    # ascii_img
     show_menu
     echo -e "\n${WHITE}Elige Correctamente una de las opciones dadas o te botare del sistema...";
     echo -e "Continuar... ${NORMAL}";

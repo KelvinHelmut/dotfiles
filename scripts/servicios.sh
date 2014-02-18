@@ -4,10 +4,10 @@ colorDefault='\e[m'
 colorServicio='\e[0;36m'
 
 typeset -a servicios
-servicios=(postgresql mysqld httpd php-fpm mpd wicd NetworkManager)
+servicios=(postgresql mysqld httpd php-fpm mpd wicd NetworkManager smbd nmbd)
 
 estado_servicio(){
-    estado=`systemctl status $1`
+    estado=`systemctl status $1 | grep Active:`
     index=`expr "$estado" : '.*Active: '`
     longitud=$[`expr "$estado" : '.*Active:.*tive'` - $index]
     estado=${estado:$index:$longitud}

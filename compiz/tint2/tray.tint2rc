@@ -5,41 +5,71 @@
 # Background definitions
 # ID 1
 rounded = 0
-border_width = 1
+border_width = 0
 background_color = #000000 50
 border_color = #000000 25
 
-# ID 5
+# ID 2
 rounded = 0
 border_width = 0
-background_color = #000000 100
-border_color = #000000 100
+background_color = #F00000 0
+border_color = #F00000 0
+# ID 2
+rounded = 0
+border_width = 0
+background_color = #F00000 90
+border_color = #F00000 0
+
 
 # Panel
-panel_items = S
+panel_items = TS
 panel_monitor = all
-panel_position = bottom left horizontal
-panel_size = 100% 60
+panel_position = top right horizontal
+panel_size = 200 30
 panel_margin = 0 0
-panel_padding = 3 3 0
+panel_padding = 0 0 0
 panel_dock = 0
 wm_menu = 0
 panel_layer = top
 panel_background_id = 1
 
 # Panel Autohide
-autohide = 1
+autohide = 0
 autohide_show_timeout = 0.7
 autohide_hide_timeout = 0.2
-autohide_height = 2
-strut_policy = none
+autohide_height = 0
+strut_policy = follow_size
 
+
+# Taskbar
+taskbar_mode = single_desktop
+taskbar_padding = 0 9 0
+taskbar_background_id = 2
+taskbar_active_background_id = 2
+
+# Tasks
+task_icon = 1
+task_text = 0
+task_centered = 1
+task_maximum_size = 10 1
+task_padding = 0 0
+task_background_id = 2
+task_active_background_id = 2
+task_urgent_background_id = 2
+task_iconified_background_id = 2
+task_tooltip = 0
+
+# Task Icons
+task_icon_asb = 0 0 0
+task_active_icon_asb = 0 0 0
+task_urgent_icon_asb = 0 0 0
+task_iconified_icon_asb = 0 0 0
 
 # System Tray
 systray = 1
-systray_padding = 2 2 5
+systray_padding = 5 2 5
 systray_sort = left2right
-systray_background_id = 0
+systray_background_id = 3
 systray_icon_size = 48
 systray_icon_asb = 100 0 0
 

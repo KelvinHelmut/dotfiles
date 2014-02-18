@@ -18,7 +18,7 @@ own_window_hints below,sticky,skip_taskbar,skip_pager,undecorated
 own_window_transparent yes 
 own_window_colour 000000
 own_window_type override
-own_window_class conky
+# own_window_class conky
 # own_window_argb_visual yes
 # own_window_argb_value 80
 text_buffer_size 8000
@@ -45,7 +45,7 @@ ${image ~/.aek6/scripts/img/fondodark-conky.png -p 0,865 -s 1600x35}\
 #------------------------------  IMAGENBG  -------------------------------------
 ${execpi 2 ~/.imgbgconky}\
 #
-${voffset 650}\
+${voffset 658}\
 #================================  TIME  =======================================
 ${offset 20}${font Raleway:weight=Light:size=100}${time %I:%M}${font}
 ${voffset 28}${offset 20}${font Raleway:weight=Light:size=24} ${time %A  %d  %B}${font}
@@ -66,7 +66,7 @@ ${offset 110}RAM${font}\
 #----------------------------  TEXT RED  ---------------------------------------
 ${offset 180}${color2}WIFI${font}\
 #---------------------------  TEXT DISCO  --------------------------------------
-${voffset -17}${offset 138}${color2}Raiz${font}\
+${voffset -16}${offset 138}${color2}Raiz${font}\
 ${voffset 14}${offset -22}${color2}Home${font}
 #
 #

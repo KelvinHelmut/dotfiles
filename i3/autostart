@@ -6,7 +6,9 @@ nm-applet &
 thunar --daemon &
 clipit --daemon &
 synapse --startup &
-#xss-lock /home/maigo/.aek6/i3/i3-lock.sh &
+xss-lock -- $HOME/.aek6/i3/i3-lock.sh &
+compton --config $HOME/.aek6/compton -b &
+# xcompmgr -c -C -f -F &
 
 
 #ESCRITORIO --------------------------------------------------------------------

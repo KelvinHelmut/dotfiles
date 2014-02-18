@@ -40,7 +40,7 @@ bindsym $mod+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# ASIGANAR LOS ESPACIOS DE TRABAJO A VARIABLES
+# ASIGNAR LOS ESPACIOS DE TRABAJO A VARIABLES
 #=============================================
 set $WS1 1
 set $WS2 2
@@ -79,7 +79,7 @@ for_window [class="Pidgin"] floating enable
 for_window [title="Lista de amigos"] floating disable
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="Oblogout"] floating enable fullscreen global
-for_window [class="I3exit"] floating enable fullscreen global
+for_window [class="I3exit"] floating enable fullscreen
 for_window [class="Lxtask"] floating enable
 for_window [class="Tilda"] floating enable
 for_window [title="tilda"] floating disable
@@ -100,7 +100,8 @@ assign [instance="Navigator|chromium|filezilla|transmission-gtk|google-chrome"] 
 assign [class="Gimp|Eclipse|Pinta|Blender|Catfish|Galculator"] $WS5
 assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
 #for_window [class="Thunar"] floating enable
-assign [instance="mousepad|leafpad|geany"] $WS3
+assign [instance="mousepad|geany"] $WS3
+assign [class="Wine"] 10
 #assign [instance="terminator|urxvt"] $WS1
 assign [instance="shotwell|nitrogen|simple-scan|quodlibet|gnome-mplayer|brasero|devede|imagination|picard|wxcam|google-musicmanager|sound-juicer"] $WS4
 assign [instance="syncbackup|bleachbit|caffeine|gparted|hardinfo|truecrypt"] $WS6
@@ -258,6 +259,8 @@ bar {
         mode dock
 #       font pango:fixed 6
         font pango:Convergence 10px
+        output VGA-0
+        # output HDMI-0
   colors {
         statusline      #8e8100
         background      #222222
@@ -290,7 +293,7 @@ bar {
 # INICIANDO DAEMONS Y APLICAIONES
 #==============================
 # iniciando daemons
-exec --no-startup-id ~/.aek6/i3/autostart
+exec --no-startup-id ~/.aek6/i3/autostart &
 
 # control de energia con dpms y el lock
 # exec --no-startup-id xset dpms 300 0 0
@@ -339,7 +342,7 @@ bindsym $mod+Shift+minus move scratchpad
 #COMANDOS PERSONALIZADOS
 #==============================
 #Aplicaciones
-bindsym $mod+e exec --no-startup-id  thunar
+bindsym $mod+e exec --no-startup-id  pantheon-files
 bindsym Mod1+Control+Delete exec --no-startup-id lxtask
 bindsym $mod+c exec --no-startup-id xcalc
 bindsym $mod+Control+c exec --no-startup-id zenity --calendar
@@ -354,8 +357,8 @@ bindsym $mod+Control+c exec --no-startup-id zenity --calendar
 bindsym $mod+Control+Right exec ncmpcpp next
 bindsym $mod+Control+Left exec ncmpcpp prev
 bindsym $mod+p exec ncmpcpp toggle
-bindsym $mod+KP_Add exec ncmpcpp volume +10
-bindsym $mod+KP_Subtract exec ncmpcpp volume -10
+bindsym $mod+KP_Add exec ncmpcpp volume +5
+bindsym $mod+KP_Subtract exec ncmpcpp volume -5
 # captura de pantalla usando imlib2_grab e import
 bindsym Print exec --no-startup-id $HOME/.aek6/scripts/captura_imlib2.sh
 bindsym --release $mod+Print exec --no-startup-id $HOME/.aek6/scripts/captura_import.sh

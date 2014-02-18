@@ -5,6 +5,22 @@ update_interval 1
 
 TEXT
 [\
+# =================================  Mail  =====================================
+# ICON
+{"icon":"$HOME/.aek6/i3/icon-xbm/original/mail.xbm",\
+"icon_color":"\#FF9933", "full_text":"", "separator":false,\
+"separator_block_width":0},\
+# TEXT
+{"full_text":"${if_match ${exec cat ~/._inbox_}<0}"},\
+{"full_text":"?", "color":"\#FF3333", "separator":false},\
+{"full_text":"${else}${if_match ${exec cat ~/._inbox_}==0}"},\
+{"full_text":"${exec cat ~/._inbox_}", "color":"\#AAF096", "separator":false},\
+{"full_text":"${else}${if_match ${exec cat ~/._inbox_}<=2}"},\
+{"full_text":"${exec cat ~/._inbox_}", "color":"\#F0DC64", "separator":false},\
+{"full_text":"${else}${if_match ${exec cat ~/._inbox_}>2}"},\
+{"full_text":"${exec cat ~/._inbox_}", "color":"\#FF9933", "separator":false},\
+{"full_text":"${endif}${endif}${endif}${endif}"},\
+#
 # ===============================  MPD playing  ================================
 # ICON
 {"icon":"$HOME/.aek6/i3/icon-xbm/original/note.xbm",\
@@ -13,7 +29,7 @@ TEXT
 # TEXT
 {"full_text":"${if_mpd_playing}", "separator":false},\
 {"full_text":\
-"${mpd_artist 20} - ${mpd_title 30}   ${mpd_elapsed} / ${mpd_length}",\
+"${mpd_smart 70}   ${mpd_elapsed} / ${mpd_length}",\
 "color":"\#268BD2", "min_width":400, "separator":false},\
 {"full_text":"${else}", "separator":false},\
 {"full_text":"mpd off", "color":"\#BB0000", "min_width":400,"separator":false},\
@@ -41,16 +57,16 @@ TEXT
 "icon_color":"\#06B800", "full_text":"", "separator":false,\
 "separator_block_width":0},\
 # TEXT
-{"full_text":"${if_match ${downspeedf wlp2s0}<100}"},\
-{"full_text":"${downspeed wlp2s0}", "color":"\#AAF096", "separator":false},\
-{"full_text":"${else}${if_match ${downspeedf wlp2s0}<300}"},\
-{"full_text":"${downspeed wlp2s0}", "color":"\#68B1E8", "separator":false},\
-{"full_text":"${else}${if_match ${downspeedf wlp2s0}<700}"},\
-{"full_text":"${downspeed wlp2s0}", "color":"\#DB70B8", "separator":false},\
-{"full_text":"${else}${if_match ${downspeedf wlp2s0}<1000}"},\
-{"full_text":"${downspeed wlp2s0}", "color":"\#9470DB", "separator":false},\
-{"full_text":"${else}${if_match ${downspeedf wlp2s0}>=1000}"},\
-{"full_text":"${downspeed wlp2s0}", "color":"\#FF3333", "separator":false},\
+{"full_text":"${if_match ${downspeedf wlp3s0}<100}"},\
+{"full_text":"${downspeed wlp3s0}", "color":"\#AAF096", "separator":false},\
+{"full_text":"${else}${if_match ${downspeedf wlp3s0}<300}"},\
+{"full_text":"${downspeed wlp3s0}", "color":"\#68B1E8", "separator":false},\
+{"full_text":"${else}${if_match ${downspeedf wlp3s0}<700}"},\
+{"full_text":"${downspeed wlp3s0}", "color":"\#DB70B8", "separator":false},\
+{"full_text":"${else}${if_match ${downspeedf wlp3s0}<1000}"},\
+{"full_text":"${downspeed wlp3s0}", "color":"\#9470DB", "separator":false},\
+{"full_text":"${else}${if_match ${downspeedf wlp3s0}>=1000}"},\
+{"full_text":"${downspeed wlp3s0}", "color":"\#FF3333", "separator":false},\
 {"full_text":"${endif}${endif}${endif}${endif}${endif}"},\
 #
 # ================================  Upload  ====================================
@@ -59,12 +75,12 @@ TEXT
 "icon_color":"\#53B1FF", "full_text":"", "separator":false,\
 "separator_block_width":0},\
 # TEXT
-{"full_text":"${if_match ${upspeedf wlp2s0}<15}"},\
-{"full_text":"${upspeed wlp2s0}", "color":"\#AAF096", "separator":false},\
-{"full_text":"${else}${if_match ${upspeedf wlp2s0}<35}"},\
-{"full_text":"${upspeed wlp2s0}", "color":"\#9470DB", "separator":false},\
-{"full_text":"${else}${if_match ${upspeedf wlp2s0}>=35}"},\
-{"full_text":"${upspeed wlp2s0}", "color":"\#FF3333", "separator":false},\
+{"full_text":"${if_match ${upspeedf wlp3s0}<15}"},\
+{"full_text":"${upspeed wlp3s0}", "color":"\#AAF096", "separator":false},\
+{"full_text":"${else}${if_match ${upspeedf wlp3s0}<35}"},\
+{"full_text":"${upspeed wlp3s0}", "color":"\#9470DB", "separator":false},\
+{"full_text":"${else}${if_match ${upspeedf wlp3s0}>=35}"},\
+{"full_text":"${upspeed wlp3s0}", "color":"\#FF3333", "separator":false},\
 {"full_text":"${endif}${endif}${endif}"},\
 #
 # ================================  Memory  ====================================
@@ -110,25 +126,11 @@ TEXT
 "color":"\#00CCCC", "separator":false, "separator_block_width":2},\
 {"full_text":"${mpd_vol}%", "color":"\#00AAAA", "separator":false},\
 #
-# =================================  Mail  =====================================
-# ICON
-{"icon":"$HOME/.aek6/i3/icon-xbm/original/mail.xbm",\
-"icon_color":"\#FF9933", "full_text":"", "separator":false,\
-"separator_block_width":0},\
-# TEXT
-{"full_text":"${if_match ${exec cat ~/._inbox_}<=0}"},\
-{"full_text":"${exec cat ~/._inbox_}", "color":"\#AAF096", "separator":false},\
-{"full_text":"${else}${if_match ${exec cat ~/._inbox_}<=2}"},\
-{"full_text":"${exec cat ~/._inbox_}", "color":"\#F0DC64", "separator":false},\
-{"full_text":"${else}${if_match ${exec cat ~/._inbox_}>2}"},\
-{"full_text":"${exec cat ~/._inbox_}", "color":"\#FF9933", "separator":false},\
-{"full_text":"${endif}${endif}${endif}"},\
-#
 # =================================  Date  =====================================
 {"full_text":"${time %A, %d de %B}", "color":"\#DDDDDD", "separator":false},\
 # =================================  Time  =====================================
 {"icon":"/home/maigo/.aek6/i3/icon-xbm/original/clock.xbm",\
-"icon_color":"\#BBBBBB", "full_text":"${time %I:%M%P}", "color":"\#EEEEEE",\
+"icon_color":"\#BBBBBB", "full_text":"${time %I:%M %P}", "color":"\#EEEEEE",\
 "separator":true, "separator_block_width":20},\
 #
 # =================================  DPMS  =====================================

@@ -60,6 +60,7 @@ launcher_padding = 7 1
 launcher_background_id = 0
 launcher_icon_size = 32
 launcher_tooltip = 1
+launcher_item_app = /home/maigo/.aek6/compiz/tint2/launchers/slingscold.desktop
 launcher_item_app = /home/maigo/.aek6/compiz/tint2/launchers/ventanas-escritorio.desktop
 launcher_item_app = /home/maigo/.aek6/compiz/tint2/launchers/ventanas-escritorios.desktop
 launcher_item_app = /home/maigo/.aek6/compiz/tint2/launchers/escritorio-anterior.desktop

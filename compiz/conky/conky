@@ -1,5 +1,5 @@
 alignment top_left
-background yes
+background no
 #border_margin 0
 border_width 0
 default_color ffffff
@@ -34,30 +34,34 @@ TEXT
 # ${image ~/.aek6/scripts/img/fondo-conky.png -p 0,0 -s 1000x1000}\
 #
 ${offset 50}${font Zekton:pixelsize=110}${time %I:%M}${font Zekton:pixelsize=30}${time :%S}${voffset -35}${offset -48}${time %P}${font}
-${font Droid Sans:pixelsize=20}${voffset 10}
+${font Droid Sans:pixelsize=20}
   ________________________________________________________________________________________________________________
-${font Droid Sans:pixelsize=20}${offset 55}${voffset 10}${time  %B %d, %Y}
+${offset 55}${voffset 10}${time  %B %d, %Y}
 ${offset 55}${time %A}
-#Ram
-${voffset -120}${offset 600}${font}RAM: ${voffset -2}${font Ubuntu:style=Bold:size=9}${memperc}% ${font}${voffset -1}  LIBRE: ${voffset -2}${font Ubuntu:style=Bold:size=9}${memeasyfree} ${font}${voffset -1}  USADO: ${voffset -2}${font Ubuntu:style=Bold:size=9}${mem}
-
-#CPUs
-${voffset -5}${offset 600}${font}CPU1: ${voffset -2}${font Ubuntu:style=Bold:size=10}${cpu cpu1}% 
-${voffset -18}${offset 670}${font}CPU2: ${voffset -2}${font Ubuntu:style=Bold:size=10}${cpu cpu2}%
-${voffset -19}${offset 740}${font}CPU3: ${voffset -2}${font Ubuntu:style=Bold:size=10}${cpu cpu3}%
-${voffset -20}${offset 810}${font}CPU4: ${voffset -2}${font Ubuntu:style=Bold:size=10}${cpu cpu4}%
 #
-${voffset -5}
+#Ram
+${voffset -115}${offset 600}${font}\
+RAM: ${font Ubuntu:style=Bold:size=9}${memperc}% ${font}  \
+${voffset -2}LIBRE: ${font Ubuntu:style=Bold:size=9}${memeasyfree} ${font}  \
+${voffset -2}USADO: ${font Ubuntu:style=Bold:size=9}${mem}
+#
+#CPUs
+${voffset 10}${offset 600}${font}\
+CPU1: ${font Ubuntu:style=Bold:size=10}${cpu cpu1}%${font} \
+${voffset -4}CPU2: ${font Ubuntu:style=Bold:size=10}${cpu cpu2}%${font} \
+${voffset -4}CPU3: ${font Ubuntu:style=Bold:size=10}${cpu cpu3}%${font} \
+${voffset -4}CPU4: ${font Ubuntu:style=Bold:size=10}${cpu cpu4}%
+#
 #Red
-${if_up wlp2s0}
-${offset 600}${voffset -4}${voffset -6}${font}Upload: ${font Ubuntu:style=Bold:size=9}${color1}${upspeed wlp2s0}${color}${font} ${goto 765}Enviado  : ${font Ubuntu:style=Bold:size=9}${color2}${totalup wlp2s0}${color}${font}
-${offset 600}${voffset 4}Señal  : ${font Ubuntu:style=Bold:size=9}${color1}${wireless_link_qual wlp2s0}%${color}${font} ${alignr 15}
-${offset 600}${voffset 4}Down   : ${font Ubuntu:style=Bold:size=9}${color1}${downspeed wlp2s0}${color}${font} ${goto 765}Recibido: ${font Ubuntu:style=Bold:size=9}${color2}${totaldown wlp2s0}${color}${font}
+${if_up wlp3s0}
+${offset 600}${font}Upload: ${font Ubuntu:style=Bold:size=9}${color1}${upspeed wlp3s0}${color}${font} ${goto 765}Enviado  : ${font Ubuntu:style=Bold:size=9}${color2}${totalup wlp3s0}${color}${font}
+${offset 600}${voffset 4}Señal  : ${font Ubuntu:style=Bold:size=9}${color1}${wireless_link_qual wlp3s0}%${color}${font} ${alignr 15}
+${offset 600}${voffset 4}Down   : ${font Ubuntu:style=Bold:size=9}${color1}${downspeed wlp3s0}${color}${font} ${goto 765}Recibido: ${font Ubuntu:style=Bold:size=9}${color2}${totaldown wlp3s0}${color}${font}
 ${endif}
 #
 #CLIMA
 #${font Raleway:weight=Light:size=12}
-${voffset -110}
+${voffset -90}
 ${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=418442&u=c" -o ~/.cache/weather.xml}${font Raleway:size=15}
 ${goto 300}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font Raleway:size=11}${goto 380}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°
 #=========== lo siguiente va en la misma linea anterior para ver 5 dias ========================
@@ -67,14 +71,14 @@ ${font Raleway:size=10}${goto 410}${execi 300 grep "yweather:forecast" ~/.cache/
 #=========== lo siguiente va en la misma linea anterior para ver 5 dias ========================
 ###${goto 256}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${goto 366}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}°${goto 480}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5'}°
 ${font Raleway:size=10}
-${voffset -30}
+${voffset -20}
 #============== para los textos de los dias =================
 ###${goto 20}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}${goto 110}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}${goto 220}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}${goto 330}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4' | tr '[a-z]' '[A-Z]'}${goto 440}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5' | tr '[a-z]' '[A-Z]'}
 ${goto 300}Hoy${goto 375}Mañana
-${font Raleway:weight=Light:size=15}${execi 300 cp -f ~/.conky/weather-icons/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 295,160 -s 24x24}${execi 300 cp -f ~/.conky/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 370,160 -s 24x24}
+${font Raleway:weight=Light:size=15}${execi 300 cp -f ~/.aek6/compiz/conky/img/clima/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 295,150 -s 24x24}${execi 300 cp -f ~/.aek6/compiz/conky/img/clima/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 370,150 -s 24x24}
 #=========== lo siguiente va en la misma linea anterior para ver 5 dias ========================
-###${execi 300 cp -f ~/.conky/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 220,219 -s 24x24}${execi 300 cp -f ~/.conky/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4').png ~/.cache/weather-4.png}${image ~/.cache/weather-4.png -p 330,219 -s 24x24}${execi 300 cp -f ~/.conky/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5').png ~/.cache/weather-5.png}${image ~/.cache/weather-5.png -p 440,219 -s 24x24}${voffset 20}
+###${execi 300 cp -f ~/.aek6/compiz/conky/img/clima/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 220,219 -s 24x24}${execi 300 cp -f ~/.aek6/compiz/conky/img/clima/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4').png ~/.cache/weather-4.png}${image ~/.cache/weather-4.png -p 330,219 -s 24x24}${execi 300 cp -f ~/.aek6/compiz/conky/img/clima/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5').png ~/.cache/weather-5.png}${image ~/.cache/weather-5.png -p 440,219 -s 24x24}${voffset 20}
 #
 #Iconos de Red y Recursos
-${image ~/.conky/taskmanager.png -p 540,70 -s 45x45}${image ~/.conky/wlan100.png -p 540,140 -s 45x45}
-${voffset -235}
+${image ~/.aek6/compiz/conky/img/taskmanager.png -p 540,65 -s 45x45}${image ~/.aek6/compiz/conky/img/wlan100.png -p 540,125 -s 45x45}
+${voffset -160}

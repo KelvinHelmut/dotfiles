@@ -1,6 +1,9 @@
 #! /usr/bin/sh
-user="usuario"
+user="user"
 password="password"
 
-correos=`wget -q -O - https://$user:$password@mail.google.com/mail/feed/atom --no-check-certificate | grep -o '<fullcount>.*</fullcount>' | grep -o '[0-9]*'`
+correos=`curl -m 5 https://$user:$password@mail.google.com/mail/feed/atom | grep -o '<fullcount>.*</fullcount>' | grep -o '[0-9]*'`
+if [[ $correos == "" ]]; then
+    correos=-1
+fi
 echo $correos > $HOME/._inbox_

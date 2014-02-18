@@ -1,0 +1,115 @@
+! x11-ssh-askpass ------------------------------------------------------------
+
+x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+x11-ssh-askpass*background:             #000000
+x11-ssh-askpass*foreground:             #ffffff
+x11-ssh-askpass.Button*background:      #000000
+x11-ssh-askpass.Indicator*foreground:   #555555
+x11-ssh-askpass.Indicator*background:   #222222
+x11-ssh-askpass*topShadowColor:         #000000
+x11-ssh-askpass*bottomShadowColor:      #000000
+x11-ssh-askpass.*borderWidth:           1
+x11-ssh-askpass.Indicator.borderWidth:  0
+! x11-ssh-askpass.title:                  OpenSSH Authentication Passphrase Request
+! x11-ssh-askpass.label:                  Please enter your authentication passphrase:
+
+
+URxvt*termName:                         rxvt-256color
+URxvt.font:                             xft:Dejavu Sans Mono for Powerline:pixelsize=14
+URxvt.geometry:                         100x30
+URxvt.cursorColor:                      #ffa800 
+
+!*background: #151515
+URxvt.depth:                            32
+URxvt.background:                       rgba:0000/0000/0000/dddd
+*color0:                                #000000
+*color1:                                #aa0000
+*color2:                                #007000
+*color3:                                #aa5500
+*color4:                                #777900
+*color5:                                #aa00aa
+*color6:                                #00aaaa
+*color7:                                #dfdfdf
+*color8:                                #555555
+*color9:                                #ff5555
+*color10:                               #21ff21
+*color11:                               #ffff55
+*color12:                               #a5ae00
+*color13:                               #ff55ff
+*color14:                               #37ffff
+*color15:                               #ffffff
+*foreground:                            #ffffff
+
+URxvt*scrollBar:                        false
+
+*saveLines:                             1000
+! *cursorBlink:       true
+! *cursorUnderline:   true
+!
+! color a las paginas del manual
+! *VT100.colorBDMode:                     true
+! *VT100.colorBD:                         red
+! *VT100.colorULMode:                     true
+! *VT100.colorUL:                         cyan
+! *VT100.veryBoldColors:                  6
+
+! URxvt.colorIT:                          #87af5f
+! URxvt.colorBD:                          #d7d7d7
+! URxvt.colorUL:                          #87afd7
+
+
+
+
+! Xterm.faceName:                         xft:Dejavu Sans Mono for Powerline:pixelsize=14
+! Xterm.background:                       rgba:0000/0000/0000/bbbb
+
+
+
+
+! xcalc-----------------------------------------------------------------------
+
+xcalc*geometry:                        400x475
+xcalc.ti.bevel.background:             #111111
+xcalc.ti.bevel.screen.background:      #000000
+xcalc.ti.bevel.screen.DEG.background:  #000000
+xcalc.ti.bevel.screen.DEG.foreground:  LightSeaGreen
+xcalc.ti.bevel.screen.GRAD.background: #000000
+xcalc.ti.bevel.screen.GRAD.foreground: LightSeaGreen
+xcalc.ti.bevel.screen.RAD.background:  #000000
+xcalc.ti.bevel.screen.RAD.foreground:  LightSeaGreen
+xcalc.ti.bevel.screen.INV.background:  #000000
+xcalc.ti.bevel.screen.INV.foreground:  Red
+xcalc.ti.bevel.screen.LCD.background:  #000000
+xcalc.ti.bevel.screen.LCD.foreground:  LightSeaGreen
+xcalc.ti.bevel.screen.LCD.shadowWidth: 0
+xcalc.ti.bevel.screen.M.background:    #000000
+xcalc.ti.bevel.screen.M.foreground:    LightSeaGreen
+xcalc.ti.bevel.screen.P.background:    #000000
+xcalc.ti.bevel.screen.P.foreground:    Yellow
+xcalc.ti.Command.foreground:  White
+xcalc.ti.Command.background:  #777777
+xcalc.ti.button5.background:  Orange3
+xcalc.ti.button19.background: #611161
+xcalc.ti.button18.background: #611161
+xcalc.ti.button20.background: #611111
+!uncomment to change label on division button
+xcalc.ti.button20.label:      /
+xcalc.ti.button25.background: #722222
+xcalc.ti.button30.background: #833333
+xcalc.ti.button35.background: #944444
+xcalc.ti.button40.background: #a55555
+xcalc.ti.button22.background: #222262
+xcalc.ti.button23.background: #222262
+xcalc.ti.button24.background: #222272
+xcalc.ti.button27.background: #333373
+xcalc.ti.button28.background: #333373
+xcalc.ti.button29.background: #333373
+xcalc.ti.button32.background: #444484
+xcalc.ti.button33.background: #444484
+xcalc.ti.button34.background: #444484
+xcalc.ti.button37.background: #555595
+xcalc.ti.button38.background: #555595
+xcalc.ti.button39.background: #555595
+XCalc*Cursor:                 hand2
+XCalc*ShapeStyle:             rectangle
+XCalc*background: #000000

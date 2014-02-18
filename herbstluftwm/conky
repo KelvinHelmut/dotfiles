@@ -1,0 +1,92 @@
+background no
+out_to_console yes
+out_to_x no
+update_interval 1.0
+total_run_times 0
+use_spacer none
+short_units yes
+
+TEXT
+# MAIL
+${font Convergence:pixelsize=10}\
+^fg(\#FF9933)^i(/home/maigo/.aek6/i3/icon-xbm/original/mail.xbm) \
+${if_match ${exec cat ~/._inbox_}<0}\
+^fg(\#FF3333)?\
+${else}${if_match ${exec cat ~/._inbox_}==0}\
+^fg(\#AAF096)${exec cat ~/._inbox_}\
+${else}${if_match ${exec cat ~/._inbox_}<=2}\
+^fg(\#F0DC64)${exec cat ~/._inbox_}\
+${else}${if_match ${exec cat ~/._inbox_}>2}\
+^fg(\#FF9933)${exec cat ~/._inbox_}\
+${endif}${endif}${endif}${endif} \
+# MPD
+^fg(\#AAAAAA)^i(/home/maigo/.aek6/i3/icon-xbm/original/note.xbm) \
+${if_mpd_playing}\
+^fg(\#268BD2)${mpd_smart 50}   ${mpd_elapsed} / ${mpd_length} \
+${else} ^fg(\#BB0000)mpd off ${endif} \
+# TEMPERATURE CPU
+^fg(\#FFFF00)^i(/home/maigo/.aek6/i3/icon-xbm/original/temp.xbm) \
+${if_match ${hwmon 0 temp 1}<45}\
+^fg(\#AAF096)${hwmon 0 temp 1}°C\
+${else}${if_match ${hwmon 0 temp 1}<50}\
+^fg(\#F0DC64)${hwmon 0 temp 1}°C\
+${else}${if_match ${hwmon 0 temp 1}<55}\
+^fg(\#FF9933)${hwmon 0 temp 1}°C\
+${else}${if_match ${hwmon 0 temp 1}>=55}\
+^fg(\#FF3333)${hwmon 0 temp 1}°C\
+${else}${endif}${endif}${endif}${endif}  \
+# DOWNLOAD
+^fg(\#06B800)^i(/home/maigo/.aek6/i3/icon-xbm/original/net_down_03.xbm) \
+${if_match ${downspeedf wlp3s0}<100}\
+^fg(\#AAF096)${downspeed wlp3s0}\
+${else}${if_match ${downspeedf wlp3s0}<300}\
+^fg(\#68B1E8)${downspeed wlp3s0}\
+${else}${if_match ${downspeedf wlp3s0}<700}\
+^fg(\#DB70B8)${downspeed wlp3s0}\
+${else}${if_match ${downspeedf wlp3s0}<1000}\
+^fg(\#9470DB)${downspeed wlp3s0}\
+${else}${if_match ${downspeedf wlp3s0}>=1000}\
+^fg(\#FF3333)${downspeed wlp3s0}\
+${endif}${endif}${endif}${endif}${endif} \
+# UPLOAD
+^fg(\#53B1FF)^i(/home/maigo/.aek6/i3/icon-xbm/original/net_up_03.xbm) \
+${if_match ${upspeedf wlp3s0}<15}\
+^fg(\#AAF096)${upspeed wlp3s0}\
+${else}${if_match ${upspeedf wlp3s0}<35}\
+^fg(\#9470DB)${upspeed wlp3s0}\
+${else}${if_match ${upspeedf wlp3s0}>=35}\
+^fg(\#FF3333)${upspeed wlp3s0}\
+${endif}${endif}${endif}  \
+# RAM
+^fg(\#777777)^i(/home/maigo/.aek6/i3/icon-xbm/original/mem.xbm) \
+${if_match ${memperc}<30}\
+^fg(\#AAF096)${memeasyfree}\
+${else}${if_match ${memperc}<60}\
+^fg(\#F0DC64)${memeasyfree}\
+${else}${if_match ${memperc}<85}\
+^fg(\#FF9933)${memeasyfree}\
+${else}${if_match ${memperc}>=85}\
+^fg(\#FF3333)${memeasyfree}\
+${endif}${endif}${endif}${endif}  \
+# CPU
+^fg(\#CCBB00)^i(/home/maigo/.aek6/i3/icon-xbm/original/cpu.xbm) \
+${if_match ${cpu cpu0}<25}\
+^fg(\#AAF096)${cpu cpu0}%\
+${else}${if_match ${cpu cpu0}<50}\
+^fg(\#F0DC64)${cpu cpu0}%\
+${else}${if_match ${cpu cpu0}<75}\
+^fg(\#FF9933)${cpu cpu0}%\
+${else}${if_match ${cpu cpu0}<=100}\
+^fg(\#FF3333)${cpu cpu0}%\
+${endif}${endif}${endif}${endif}  \
+# VOLUME
+^fg(\#00CCCC)^i(/home/maigo/.aek6/i3/icon-xbm/original/spkr_01.xbm) \
+${execi 1 amixer sget Master,0 | egrep -m 1 -o '([0-9]+%)'} ${mpd_vol}% \
+# TIME
+${font}\
+^fg(${exec herbstclient get window_border_active_color})| \
+^fg(\#909090)^ca(1,/home/maigo/.aek6/herbstluftwm/calendar-dzen2.sh)\
+${time %A %d, de %B}^ca() \
+^fg(\#BBBBBB)^i(/home/maigo/.aek6/i3/icon-xbm/original/clock.xbm) \
+^fg(\#efefef)${time %I:%M %P} \
+^fg(${exec herbstclient get window_border_active_color})| \

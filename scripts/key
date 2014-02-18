@@ -2,7 +2,7 @@
 
 texto="aek6 System"
 while [[ $texto != "" ]]; do
-    keychain -Q -q ~/.ssh/id_rsa 2> ~/.null
+    keychain -q ~/.ssh/id_rsa 2> ~/.null
     texto=`cat ~/.null`
 done
 rm ~/.null

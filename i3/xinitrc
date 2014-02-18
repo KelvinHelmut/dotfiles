@@ -15,12 +15,12 @@ fi
 
 numlockx &
 mpd --no-daemon &
-xrdb -merge ~/.Xresources
-hsetroot -solid "#000000"
-compton --config $HOME/.aek6/compton.conf -b
-xss-lock -- $HOME/.aek6/i3/i3-lock.sh &
-# xautolock -locker $HOME/.aek6/i3/i3-lock.sh -time 3 -nowlocker $HOME/.aek6/i3/i3-lock.sh &
+xrdb -merge ~/.Xresources &
+# hsetroot -solid "#000000" &
+feh --bg-fill ~/Imágenes/shana.png
 
 .aek6/scripts/key
+
+nvidia-settings -a InitialPixmapPlacement=2
 
 exec i3
