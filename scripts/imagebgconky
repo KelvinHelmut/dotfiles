@@ -1,12 +1,12 @@
 #!/usr/bin/perl
 
-$path = `echo \$HOME`;
-chomp($path);
+# $path = `echo \$HOME`;
+# chomp($path);
 
-$namebg = `cat  $path/.fehbg`;
+$namebg = `cat  ~/.fehbg`;
 @data = split(" ", $namebg);
-$namebg = substr($data[2], 1, length($data[2]) - 2);
-$path = $path . "/Imágenes/Fondos/" . $namebg;
+$path = substr($data[2], 1, length($data[2]) - 2);
+# $path = $path . "/Imágenes/Fondos/" . $namebg;
 
 $size = `identify $path`;
 @data = split(" ", $size);
