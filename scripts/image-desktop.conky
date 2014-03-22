@@ -1,0 +1,203 @@
+#!/bin/bash
+
+#  =============================================================================
+#
+#        Filename:  image-desktop.conky
+#
+#         Version:  1.0
+#         Created:  20/03/14 00:22:55
+#
+#          Author:  KELVIN HELMUT PROVINCIA QUISPE, aek6.io@gmail.com
+#    Organization:  aek6
+#
+#  =============================================================================
+
+SLEEP_=120
+PATH_IMG=~/Imágenes/Fondos
+# FONDO_=~/.aek6/scripts/img/fondo2-conky.png
+BORDER_=1
+BG_=1       # 1: change background
+
+# conky options
+ALIGN=bottom_right
+GAP_X=50
+GAP_Y=150
+X=0
+Y=0
+CONKY_WIN_TYPE=override
+
+detectwm () {
+    wmnames=( fluxbox openbox blackbox xfwm4 metacity kwin icewm pekwm fvwm dwm awesome wmaker stumpwm musca xmonad i3 ratpoison scrotwm spectrwm wmfs wmii beryl subtle e16 enlightenment sawfish emerald monsterwm dminiwm compiz Finder herbstluftwm notion bspwm cinnamon )
+    WM_="Not Found"
+    for each in "${wmnames[@]}"; do
+        PID="$(pgrep -U ${UID} $each)"
+        if [ "$PID" ]; then
+            WM_=$each
+            break
+        fi
+    done
+}
+detectwm
+
+getImage() {
+    cd $PATH_IMG
+
+    files=()
+    for i in *.jpg *.png; do
+        [[ -f $i  ]] && files+=("$i")
+    done
+    range=${#files[@]}
+
+    ((range)) && IMAGE_=$PATH_IMG/${files[RANDOM % range]}
+    cd
+}
+
+scalar() {
+    dimension=`identify $IMAGE_ | awk '{print $3}'`
+    w=`echo $dimension | sed 's/x.*$//'`
+    h=`echo $dimension | sed 's/^.*x//'`
+
+    new_h=225
+    min_w=350
+    scale=`echo "scale=3; $h/$new_h" | bc`
+    if [[ `echo $scale | sed 's/\..*$//'` -eq min_w ]]; then
+        scale=`echo "scale=3; $w/$min_w" | bc`
+        w=$min_w
+        h=`echo "scale=0; $h/$scale" | bc`
+    else
+        h=$new_h
+        w=`echo "scale=0; $w/$scale" | bc`
+    fi
+}
+
+write_conky() {
+    getImage
+    scalar
+
+    cat > $HOME/.image-desktop.conky <<EOF
+alignment $ALIGN
+background no
+border_width 0
+double_buffer yes
+draw_borders no
+draw_outline no
+draw_shades no
+no_buffers yes
+override_utf8_locale yes
+own_window yes 
+own_window_hints below,sticky,skip_taskbar,skip_pager,undecorated
+own_window_transparent yes
+own_window_colour 000000
+own_window_type $CONKY_WIN_TYPE
+# own_window_class conky-semi
+# own_window_argb_visual yes
+# own_window_argb_value 80
+text_buffer_size 8000
+total_run_times 0
+update_interval $SLEEP_
+uppercase no
+use_xft yes
+xftalpha 1
+# xftfont Freesans:pixelsize=9
+minimum_size $(echo $[$w + $BORDER_ * 2]) $(echo $[$h + $BORDER_ * 2])
+gap_x $GAP_X
+gap_y $GAP_Y
+display $DISPLAY
+
+TEXT
+#\${image $FONDO_ -p $X,$Y -s $(echo $[$w + $BORDER_ * 2])x$(echo $[$h + $BORDER_ * 2])}
+\${image $IMAGE_ -p $(echo $[$X + $BORDER_]),$(echo $[$Y + $BORDER_]) -s ${w}x$h}
+# $img
+EOF
+
+    if [[ $BG_ -eq 1 ]]; then
+        # hsetroot -tile $IMAGE_  -tint '#505050' -fliph
+        hsetroot -solid '#505050' -center $IMAGE_ -tint '#303030' -fliph
+        # feh --bg-fill $IMAGE_
+    fi
+}
+
+# override_() {
+#     getImage
+#     # file_img=$(mktemp --tmpdir img-XXXXXXXXXX.png)
+#     # hsetroot -fill $IMAGE_ -write $file_img -solid '#505050' -center $IMAGE_ -tint '#505050' -fliph
+#     hsetroot -solid '#505050' -center $IMAGE_ -tint '#505050' -fliph
+#     img_ov="\${image $IMAGE_ -p $(echo $[$X + $BORDER_]),$(echo $[$Y + $BORDER_]) -s ${w}x$h}"
+#     echo "echo '"$img_ov"'" > $HOME/.image-desktop.conky.override
+#     chmod +x $HOME/.image-desktop.conky.override
+#     sleep $SLEEP_
+#     override_
+# }
+
+start_conky() {
+    write_conky
+    conky -c $HOME/.image-desktop.conky 2> .null.conky &
+    PID=$!
+}
+
+only_root_window() {
+    i=0
+    while : ; do
+        i=$[$i + 1]
+        # echo "intento $i"
+        valid=`grep 'is root window' .null.conky`
+        [[ $? -ne 0 ]] || break
+        [[ i -lt 5 ]] || break
+    done
+    if [[ $valid ]]; then
+        sleep $SLEEP_
+    else
+        echo ' -> invalid'
+        echo '===> terminar conky <==='
+        kill $PID
+        PID=PID
+        sleep 3
+    fi
+}
+
+override_i3() {
+    tree=`i3-msg -t get_tree`
+    focus=`echo $tree | jshon -e nodes -a -e nodes -a -e nodes -a -e nodes -a -e focused`
+    i=0
+    fullscreen=""
+    for foc in $focus; do
+        i=$[$i + 1]
+        if [[ "$foc" == "true" ]]; then
+            fullscreen=`echo $tree | jshon -e nodes -a -e nodes -a -e nodes -a -e nodes -a -e fullscreen_mode`
+            break
+        fi
+    done
+    for full in $fullscreen; do
+        i=$[$i - 1]
+        if [[ i -eq 0 ]]; then
+            if [[ full -eq 1 ]]; then
+                echo '!!! esperar por conky !!!'
+                sleep 2
+                override_i3
+                return
+            fi
+            break
+        fi
+    done
+    if [[ "$PID" == "PID" ]]; then
+        echo -e "\n===> iniciar conky <==="
+        start_conky
+        only_root_window        # or sleep $SLEEP_
+    else
+        echo '===> terminar conky <==='
+        kill $PID
+        PID=PID
+    fi
+    override_i3
+}
+
+if [[ "$CONKY_WIN_TYPE" == "override" && "$WM_" == "i3" ]]; then
+    PID=PID
+    override_i3
+else
+    while true; do
+        start_conky
+        sleep $SLEEP_
+        kill $PID
+    done
+fi
