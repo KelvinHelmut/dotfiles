@@ -1,12 +1,9 @@
 #!/usr/bin/perl
 
-$path = `echo \$HOME`;
-chomp($path);
-
-$namebg = `cat  $path/.fehbg`;
-@data = split(" ", $namebg);
-$namebg = substr($data[2], 1, length($data[2]) - 2);
-$path = $path . "/Imágenes/Fondos/" . $namebg;
+# $namebg = `cat  ~/.fehbg`;
+# @data = split(" ", $namebg);
+# $path = substr($data[2], 1, length($data[2]) - 2);
+$path = `~/.aek6/scripts/image-random`;
 
 $size = `identify $path`;
 @data = split(" ", $size);
@@ -29,10 +26,11 @@ if ($w / $scale < $min_w) {
 }
 
 $border = 4;        # Borde de la imagen.
-$x = 1570 - $w;     # Punto (x, y) de la pantalla donde iniciará
-$y = 790 - $h;      # la esquina inferior derecha de la imágen.
+# $x = 1570 - $w;     # Punto (x, y) de la pantalla donde iniciará
+# $y = 790 - $h;      # la esquina inferior derecha de la imágen.
+$x = 0;
+$y = 0;
 
 $text = "echo \\\\\\\${image ~/.aek6/scripts/img/fondo2-conky.png -p " . ($x - $border) . "," . ($y - $border) . " -s " . ($w + $border * 2) . "x" . ($h + $border * 2) . "}\\\\\\\${image $path -p $x,$y -s $w" . "x" . "$h}\\";
-$text = "echo $text > ~/.imgbgconky";
-`$text`;
-`chmod +x ~/.imgbgconky`
+`echo $text > ~/.imgbgconky`;
+`chmod +x ~/.imgbgconky`;
