@@ -1,9 +1,19 @@
 #!/usr/bin/perl
 
+<<<<<<< HEAD
 # $namebg = `cat  ~/.fehbg`;
 # @data = split(" ", $namebg);
 # $path = substr($data[2], 1, length($data[2]) - 2);
 $path = `~/.aek6/scripts/image-random`;
+=======
+# $path = `echo \$HOME`;
+# chomp($path);
+
+$namebg = `cat  ~/.fehbg`;
+@data = split(" ", $namebg);
+$path = substr($data[2], 1, length($data[2]) - 2);
+# $path = $path . "/Imágenes/Fondos/" . $namebg;
+>>>>>>> 0a3e20b7ef539978417553be6a548cfd605e377c
 
 $size = `identify $path`;
 @data = split(" ", $size);
