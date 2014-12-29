@@ -589,7 +589,7 @@ local function widget_pacman()
         pacman:buttons(awful.util.table.join(awful.button({}, 1, 
             function() 
                 os.execute(terminal 
-                            ..' -title "Pacman Update" -e "sudo pacman -Su"')
+                            ..' -title "Pacman Update" -e sudo pacman -Su')
             end
         )))
 
