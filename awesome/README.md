@@ -7,7 +7,7 @@
 ## Requerimientos
 ### Variables de Entorno (Environment variables)
 $DIR_DOTFILES -> */home/user/.dotfiles* -> <https://github.com/aek6/dotfiles>  
-*ver <https://github.com/aek6/dotfiles/xprofile>*  
+*ver <https://github.com/aek6/dotfiles/blob/master/xprofile>*  
 
 ### Librerias awesomewm
 **Vicious**  [aquí](http://git.sysphere.org/vicious/tree/README "Vicious" )  
