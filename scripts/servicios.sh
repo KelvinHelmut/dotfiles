@@ -4,7 +4,8 @@ colorDefault='\e[m'
 colorServicio='\e[0;36m'
 
 typeset -a servicios
-servicios=(postgresql mysqld httpd php-fpm mpd wicd NetworkManager smbd nmbd)
+servicios=(postgresql mysqld httpd php-fpm mpd wicd NetworkManager smbd nmbd
+tomcat7)
 
 estado_servicio(){
     estado=`systemctl status $1 | grep Active:`

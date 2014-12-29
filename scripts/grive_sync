@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cd "$1"
+is_grive=$(ls -a | grep .grive)
+
+if [[ $is_grive == "" ]]; then
+    notify-send -i network-error -u critical -t 2000  "Grive Sync" \
+    "Esta carpeta no esta sincronizada con Google Drive. Para hacerlo run 'grive -a'"
+else
+    notify-send -i network-transmit -t 1000 \
+        "Grive Sync" "Procesando..."
+    grive $2 &> /tmp/grive_sync.log
+    msg=$(cat /tmp/grive_sync.log)
+    notify-send -i network-transmit "Grive Sync" "$msg"
+fi

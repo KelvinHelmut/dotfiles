@@ -1,9 +1,71 @@
 #! /usr/bin/sh
-user="user"
-password="password"
+# ~/.netrc > machine mail.google.com login mimail@gmail.com password mipassword
+timeout=5
+request=count
 
-correos=`curl -m 5 https://$user:$password@mail.google.com/mail/feed/atom | grep -o '<fullcount>.*</fullcount>' | grep -o '[0-9]*'`
-if [[ $correos == "" ]]; then
-    correos=-1
+getmailxml() {
+    echo $(curl -n -m $timeout https://mail.google.com/mail/feed/atom)
+}
+
+getmailcount() {
+    local count=$(getmailxml | grep -o '<fullcount>.*</fullcount>' | grep -o '[0-9]*')
+    if [[ $count == "" ]]; then
+        count=-1
+    fi
+    echo $count
+}
+
+getmails() {
+    local mails=$(getmailxml | grep -oP "(?<=<title>)[^<]+" | sed 1d)
+    if [[ $mails != "" ]]; then
+        echo -e "$mails"
+    fi
+}
+
+help_gmail() {
+    echo "options:"
+    echo -e "-t\ttime curl"
+    echo -e "-p\trequest [count|mails|]"
+}
+
+while getopts ":t:p:h" opt; do
+    case $opt in
+        h)
+            help_gmail
+            exit 0
+            ;;
+        t)
+            int='^[0-9]+$'
+            if ! [[ $OPTARG =~ $int ]]; then
+                echo "ERROR: -t value must number integer"; exit 1
+            fi
+            timeout=$OPTARG
+            ;;
+        p)
+            case $OPTARG in
+                count)
+                    ;;
+                mails)
+                    ;;
+                *)
+                    echo "ERROR: -p values [count|mails]"; exit 1
+                    ;;
+            esac
+            request=$OPTARG
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [[ $request == count ]]; then
+    getmailcount
+else
+    getmails
 fi
-echo $correos > $HOME/._inbox_

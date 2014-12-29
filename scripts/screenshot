@@ -1,0 +1,52 @@
+#! /usr/bin/sh
+
+path=$HOME/Imágenes/screenshots
+
+_help() {
+    echo "options:"
+    echo -e " -m  mode [select|focused]. Default screen"
+    echo -e " -p  path images. Default $path"
+    echo -e " -v  view. Requiere 'feh'"
+    echo -e " -h  help"
+}
+
+# VALIDATE OPTIONS {{{
+while getopts ":m:p:vh" opt; do 
+    case $opt in 
+        h)
+            _help; exit 0
+            ;;
+        m)
+            case $OPTARG in 
+                select) ;;
+                focused);;
+                *)
+                    echo "ERROR: -m values [select|focused]."; exit 1
+                    ;;
+            esac
+            mode="--$OPTARG"
+            ;;
+        p)
+            if [[ -d $OPTARG ]]; then
+                path=$OPTARG
+            else
+                echo "ERROR: $OPTARG is not a directory."; exit 1
+            fi
+            ;;
+        v)
+            view='feh -g 800x600 $f'
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2; _help; exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requiere an argument." >&2; _help; exit 1
+            ;;
+    esac
+done
+# END VALIDATE OPTIONS }}}
+
+file=$(mktemp --tmpdir -u $(date +%Y-%m-%d)_XXXXX.png)
+file=$(echo $file | sed 's/.*\///')
+mkdir -p $path
+scrot $mode "$path/$file" -e "$view"
