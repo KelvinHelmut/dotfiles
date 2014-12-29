@@ -1,0 +1,4 @@
+#! /usr/bin/sh
+
+count=$(pacman -Qu | wc -l)
+echo -e "$1:set_markup('<span foreground=\"#FFE200\">$count</span>')" | awesome-client
