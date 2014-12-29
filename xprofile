@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# ~/.xprofile
+
+export DIR_DOTFILES="$HOME/.aek6"
+
+autostart () {
+    wmnames=(i3 compiz herbstluftwm awesome bspwm openbox)
+    files=(~/.aek6/i3/autostart ~/.aek6/compiz/autostart 
+    ~/.aek6/herbstluftwm/init ~/.aek6/awesome/autostart ~/.aek6/bspwm/autostart 
+    ~/.aek6/openbox/autostart)
+    wm=$1
+    [[ "compiz" == $(echo $wm | grep -o 'compiz') ]] && wm="compiz"
+    i=0
+    for wmname in "${wmnames[@]}"; do
+        if [[ $wm == $wmname ]]; then
+            file=${files[$i]}
+            if [[ -f $file ]]; then
+                sh $file
+            else
+                notify-send 'Bienvenido!' 'No se encontró el archivo \
+                autostart '"($file)" --icon=dialog-warning
+            fi
+            break
+        fi
+        i=$[i + 1]
+    done
+}
+
+# DAEMONS ----------------------------------------------------------------------
+mpd --no-daemon &
+hsetroot -solid "#000000" &
+thunar --daemon &
+nm-applet &
+clipit --daemon &
+
+# SCRIPTS ----------------------------------------------------------------------
+
+autostart $1 &
