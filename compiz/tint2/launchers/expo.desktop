@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Escritorios
-Comment=Muestra escritorio expo compiz
-Exec=xdotool key Super+s
-Icon=/home/maigo/Imágenes/Iconos/tint2/expo.png

@@ -1,0 +1,205 @@
+#! /bin/sh 
+
+SCRIPTS=$DIR_DOTFILES/scripts 
+CONKY=$DIR_DOTFILES/i3/conky
+TMP=/tmp 
+
+GREEN="#aaf096"
+YELLOW="#f0dc64"
+ORANGE="#ff9933"
+RED="#ff3333"
+
+ICON_CPU=""
+ICON_MEM=""
+ICON_UP=""
+ICON_DOWN=""
+ICON_TEMP=""
+ICON_MAIL=""
+ICON_PACKS=""
+ICON_CALENDAR=""
+ICON_CLOCK=""
+ICON_VOLUME=""
+
+
+main() {
+    GMAIL
+    PACMAN
+
+    echo '{ "version": 1 }'
+    echo '['
+    echo '[],'
+    info
+}
+
+info() {
+    conky -c $CONKY | while read -r; do 
+        LINE='{"full_text":""}'
+
+        IFS=';' read -ra DATA <<< "$REPLY"
+
+        # from 0.0 to 0   ...  2.3 to 2
+        DATA[1]=$(echo ${DATA[1]} | sed 's/\..*$//')  # down speed
+        DATA[3]=$(echo ${DATA[3]} | sed 's/\..*$//')  # up speed
+
+        icon $ICON_TEMP "#ffff00"
+        temperature ${DATA[0]}
+
+        icon $ICON_DOWN "#06b800"
+        downspeed ${DATA[1]} ${DATA[2]}
+
+        icon $ICON_UP "#53b1ff"
+        upspeed ${DATA[3]} ${DATA[4]}
+
+        icon $ICON_MEM "#777777"
+        memory ${DATA[5]} ${DATA[6]}
+
+        icon $ICON_CPU "#ccbb00"
+        cpu ${DATA[7]}
+
+        icon $ICON_VOLUME "#00cccc"
+        volume
+
+        icon $ICON_CALENDAR "#a0a0a0"
+        datetime '%A, %d de %B'
+        icon $ICON_CLOCK "#eeeeee"
+        datetime '%I:%M %P'
+
+        mails
+        packages
+
+        line '' ', "separator_block_width":10'
+
+        echo -e "[$LINE],"
+    done
+}
+
+temperature() {
+    if [[ $1 -lt 45 ]]; then
+        COLOR=$GREEN
+    elif [[ $1 -lt 50 ]]; then
+        COLOR=$YELLOW
+    elif [[ $1 -lt 55 ]]; then
+        COLOR=$ORANGE
+    else
+        COLOR=$RED
+    fi
+
+    line "$1°C"
+}
+
+downspeed() {
+    if [[ $1 -lt 100 ]]; then
+        COLOR=$GREEN
+    elif [[ $1 -lt 300 ]]; then
+        COLOR="#68b1e8"
+    elif [[ $1 -lt 700 ]]; then
+        COLOR="#db70b8"
+    elif [[ $1 -lt 1000 ]]; then
+        COLOR="#9470db"
+    else
+        COLOR=$RED
+    fi
+
+    line "$2"
+}
+
+upspeed() {
+    if [[ $1 -lt 15 ]]; then
+        COLOR=$GREEN
+    elif [[ $1 -lt 35 ]]; then
+        COLOR="#9470db"
+    else
+        COLOR=$RED
+    fi
+
+    line "$2"
+}
+
+memory() {
+    if [[ $1 -lt 30 ]]; then
+        COLOR=$GREEN
+    elif [[ $1 -lt 60 ]]; then
+        COLOR=$YELLOW
+    elif [[ $1 -lt 85 ]]; then
+        COLOR=$ORANGE
+    else
+        COLOR=$RED
+    fi
+
+    line "$2"
+}
+
+cpu() {
+    if [[ $1 -lt 25 ]]; then
+        COLOR=$GREEN
+    elif [[ $1 -lt 50 ]]; then
+        COLOR=$YELLOW
+    elif [[ $1 -lt 75 ]]; then
+        COLOR=$ORANGE
+    else
+        COLOR=$RED
+    fi
+
+    line "$1%"
+}
+
+datetime() {
+    FORMAT=$1
+    line "$(date +"$FORMAT")"
+}
+
+volume() {
+    COLOR="#00cccc"
+    line "$(amixer sget Master,0 | egrep -m 1 -o '([0-9]+%)')"
+}
+
+mails() {
+    n="$(cat $TMP_MAIL)"
+    if [[ $n -gt 0 ]]; then
+        COLOR=$ORANGE
+    else
+        return
+    fi
+
+    icon $ICON_MAIL "#ff9933"
+    line "$n"
+}
+
+packages() {
+    n="$(cat $TMP_PACMAN)"
+    if [[ $n -le 0 ]]; then
+        return
+    fi
+
+    icon $ICON_PACKS "#ffe200"
+    line "$n"
+}
+
+GMAIL() {
+    TMP_MAIL="$TMP/.gmail-inbox"
+    while : ; do 
+        MAILS="$($SCRIPTS/gmail)"
+        echo "$MAILS" > $TMP_MAIL
+        sleep 10
+    done &
+}
+
+PACMAN() {
+    TMP_PACMAN="$TMP/.pacman-packages"
+    while : ; do 
+        pacman -Qu | wc -l > $TMP_PACMAN
+        sleep 500
+    done &
+}
+
+icon() {
+    COLOR=$2
+    line $1 ', "separator_block_width":5'
+}
+
+line() {
+    LINE=$LINE',{"full_text":"'$1'", "color":"'$COLOR'", "separator":false '$2'}'
+}
+
+
+main

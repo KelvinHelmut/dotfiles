@@ -1,0 +1,11 @@
+out_to_x no
+out_to_console yes
+short_units yes
+update_interval 1
+
+TEXT
+${hwmon 0 temp 1}; \
+${downspeedf wlp3s0}; ${downspeed wlp3s0}; \
+${upspeedf wlp3s0}; ${upspeed wlp3s0}; \
+${memperc}; ${memeasyfree}; \
+${cpu cpu0}

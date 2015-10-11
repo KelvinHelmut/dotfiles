@@ -1,0 +1,24 @@
+#!/bin/sh
+
+step=5
+
+case "$1" in 
+    "up")
+        volume=$(amixer set Master $step%+);;
+    "down")
+        volume=$(amixer set Master $step%-);;
+    "toggle")
+        volume=$(amixer set Master toggle);;
+    *)
+        exit 0;;
+esac
+    
+muted=$(echo $volume | tail -n1 | sed -E 's/.*\[([a-z]+)\]/\1/')
+volume=$(echo $volume | tail -n1 | sed -E 's/.*\[([0-9]+)\%\].*/\1/')
+
+killall notify-osd
+if [[ $muted == "off" ]]; then
+    notify-send "Muted" -t 1000 -i notification-audio-volume-muted -h int:value:$volume
+else
+    notify-send "Volume" -t 800 -i notification-audio-volume-medium -h int:value:$volume
+fi

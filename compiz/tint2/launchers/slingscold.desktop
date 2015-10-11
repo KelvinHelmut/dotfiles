@@ -1,9 +1,0 @@
-
-[Desktop Entry]
-Name=Aplicaciones
-Comment=Lanzador de aplicaciones
-Exec=slingscold
-Icon=/home/maigo/Imágenes/Iconos/tint2/applauncher2.png
-Type=Application
-Categories=GNOME;GTK;Utility;
-StartupNotify=false
