@@ -109,7 +109,7 @@ alias ls='ls --color=auto -A'
 alias ll='ls -l'
 alias la='ls -a'
 alias reload='clear && source ~/.zshrc'
-alias rm='sudo rm -rv'
+alias rm='rm -rv'
 alias cp='cp -rv'
 alias mv='mv -vi'
 alias open='xdg-open'
@@ -217,8 +217,8 @@ config () {
 # }}}
 
 # {{{ Startup Functions
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-syntax-highlighting/06-syntax-rules.zsh
+#source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/.zsh/zsh-syntax-highlighting/06-syntax-rules.zsh
 # }}}
 
 # Keys {{{

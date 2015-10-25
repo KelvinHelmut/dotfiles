@@ -1,8 +1,9 @@
 #!/bin/sh
 
-wms=(i3 compiz herbstluftwm awesome bspwm openbox)
+# WINDOWS MANAGERS
+WMS=$(ls /usr/share/xsessions | sed 's/\.desktop$//')
 
-# colores
+# COLORS
 NORMAL='\033[m'
 BLUE='\033[1;34m'
 YELLOW='\033[1;33m'
@@ -13,7 +14,7 @@ FUCCIA='\033[1;35m'
 WHITE='\033[1;37m'
 
 
-ascii_img(){
+ascii_img() {
     echo -e '\e[H\e[2J' 
     echo -e '                                                            \e[1;30m| \e[34m\\s \\r' 
     echo -e '       \e[36;1m/\\\\                      \e[37m||     \e[36m| |                   \e[30m|' 
@@ -27,52 +28,48 @@ ascii_img(){
     echo -e '' 
 }
 
-show_menu(){
+menu() {
     i=1
     lon=0
-    opciones="| "
-    borde="+"
-    for wm in ${wms[*]}; do
-        opciones="$opciones$YELLOW$i) $GREEN$wm  $RED| "
+    options="| "
+    border="+"
+
+    for wm in ${WMS[*]}; do
+        options="$options$YELLOW$i. $GREEN$wm  $RED| "
         i=$[i + 1]
         lon=$[${#wm} + ${#i}]
         for (( j = 0; j < lon + 4; j++ )); do
-            borde="$borde-"
+            border="$border-"
         done
-        borde="$borde+"
+        border="$border+"
     done
     lon=$i
 
-    echo -e "\n${YELLOW}Elige el WM(Gestor de ventanas) que quieres iniciar:"
-    echo -e $RED$borde
-    echo -e $opciones
-    echo -e $RED$borde
-    echo -e "\n${YELLOW}Dame el numero de tu opción: ${NORMAL}"
+    echo -e "\n${YELLOW}Choose window manager to init:"
+    echo -e $RED$border
+    echo -e $options
+    echo -e $RED$border
+    echo -e "\n${YELLOW}Number option: ${NORMAL}"
     read opt
 
     i=1
-    for x in ${wms[*]}; do
+    for wm in ${WMS[*]}; do
         if [ $opt == $i ]; then
-            wm=$x
-            if [[ $wm == "compiz" ]]; then
-                wm="compiz cpp"
-            fi
-
-            echo $wm > ~/.xinitwm
+            echo $wm
             exit 0;
         fi
         i=$[i + 1]
     done
 }
 
-iniciar(){
-    # ascii_img
-    show_menu
-    echo -e "\n${WHITE}Elige Correctamente una de las opciones dadas o te botare del sistema...";
-    echo -e "Continuar... ${NORMAL}";
+__init__() {
+    ascii_img
+    menu
+    echo -e "\n${WHITE}Option invalid!. (Ctrl+C continue in console)";
+    echo -e "Continue... ${NORMAL}";
     read enter
     clear
-    iniciar
+    __init__
 }
 
-iniciar
+__init__

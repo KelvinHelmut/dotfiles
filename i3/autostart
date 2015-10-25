@@ -1,26 +1,15 @@
 #! /bin/sh
 
 #DAEMONS -----------------------------------------------------------------------
-# wicd-client --tray &
-nm-applet &
-thunar --daemon &
-clipit --daemon &
-synapse --startup &
-xss-lock -- $HOME/.aek6/i3/i3-lock.sh &
-compton --config $HOME/.aek6/compton -b &
-# xcompmgr -c -C -f -F &
+feh --bg-fill $DOTFILES/i3/background.png --no-fehbg
+compton --config $DOTFILES/compton.conf -b &
+redshift -l -16.3988:-71.5369 &
+xss-lock -- $DOTFILES/i3/i3lock &
+
+while : ; do 
+    synapse --startup
+done &
 
 
-#ESCRITORIO --------------------------------------------------------------------
-conky -c ~/.aek6/conky/full &
-# imagen de fondo
-~/.aek6/scripts/wallpaper2.sh &
-
-
-#NOTIFICACIONES ----------------------------------------------------------------
-# Correo gmail
-~/.aek6/scripts/gmail.sh &
-
-
-#APLICACIONES ------------------------------------------------------------------
-(sleep 15 && pidgin) &
+#APPLICATIONS ------------------------------------------------------------------
+#(sleep 15 && pidgin) &

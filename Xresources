@@ -4,8 +4,8 @@ x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
 x11-ssh-askpass*background:             #000000
 x11-ssh-askpass*foreground:             #ffffff
 x11-ssh-askpass.Button*background:      #000000
-x11-ssh-askpass.Indicator*foreground:   #555555
-x11-ssh-askpass.Indicator*background:   #222222
+x11-ssh-askpass.Indicator*foreground:   #777777
+x11-ssh-askpass.Indicator*background:   #111111
 x11-ssh-askpass*topShadowColor:         #000000
 x11-ssh-askpass*bottomShadowColor:      #000000
 x11-ssh-askpass.*borderWidth:           1
@@ -13,10 +13,9 @@ x11-ssh-askpass.Indicator.borderWidth:  0
 ! x11-ssh-askpass.title:                  OpenSSH Authentication Passphrase Request
 ! x11-ssh-askpass.label:                  Please enter your authentication passphrase:
 
-/* URxvt*termName:                         rxvt-unicode-256color */
+! URxvt*termName:                         rxvt-unicode-256color
 URxvt.font:                             xft:Dejavu Sans Mono for Powerline:pixelsize=14
 URxvt.geometry:                         100x30
-/* URxvt.cursorColor:                      #ffa800 */ 
 URxvt*scrollBar:                        false
 
 urxvt*fading: 40

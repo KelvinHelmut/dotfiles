@@ -20,13 +20,13 @@ set nocompatible
 " NeoBundle auto-installation and setup {{{
 
 " Auto Instalacion de NeoBundle {{{
-" let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-" if !filereadable(neobundle_readme)
-"     echo "Instalando NeoBundle..."
-"     echo ""
-"     silent !mkdir -p $HOME/.vim/bundle
-"     silent !git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
-" endif
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+    echo "Instalando NeoBundle..."
+    echo ""
+    silent !mkdir -p $HOME/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+endif
 " }}}
 
 
@@ -91,8 +91,8 @@ NeoBundle 'jimsei/winresizer'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'scrooloose/nerdtree'
 
-NeoBundleLazy 'joedicastro/vim-markdown'
-NeoBundleLazy 'joedicastro/vim-markdown-extra-preview'
+" NeoBundleLazy 'joedicastro/vim-markdown'
+" NeoBundleLazy 'joedicastro/vim-markdown-extra-preview'
 " END BUNDLES }}}
 
 " Auto install the plugins {{{
@@ -448,9 +448,9 @@ nnoremap Y y$
 set noshowmode
 
 let g:airline_theme='powerlineish'
-let g:airline_enable_branch=1
 let g:airline_powerline_fonts=1
-let g:airline_detect_whitespace = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
 let g:airline#extensions#tabline#enabled = 2

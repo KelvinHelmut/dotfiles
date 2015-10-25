@@ -2,10 +2,11 @@
 
 texto="aek6 System"
 while [[ $texto != "" ]]; do
-    keychain -q ~/.ssh/id_rsa 2> ~/.null
-    texto=`cat ~/.null`
+    keychain -q ~/.ssh/id_ecdsa 2> /tmp/keychain
+    texto=`cat /tmp/keychain`
 done
-rm ~/.null
 
 [ -f ~/.keychain/$HOSTNAME-sh ] && . ~/.keychain/$HOSTNAME-sh 2>/dev/null
 [ -f ~/.keychain/$HOSTNAME-sh-gpg ] && . ~/.keychain/$HOSTNAME-sh-gpg 2>/dev/null
+
+keychain --clear

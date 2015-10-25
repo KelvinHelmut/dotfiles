@@ -1,7 +1,7 @@
 #! /bin/sh 
 
-SCRIPTS=$DIR_DOTFILES/scripts 
-CONKY=$DIR_DOTFILES/i3/conky
+SCRIPTS=$DOTFILES/scripts 
+CONKY=$DOTFILES/i3/conky
 TMP=/tmp 
 
 GREEN="#aaf096"
@@ -19,6 +19,7 @@ ICON_PACKS=""
 ICON_CALENDAR=""
 ICON_CLOCK=""
 ICON_VOLUME=""
+ICON_BATTERY=""
 
 
 main() {
@@ -37,26 +38,16 @@ info() {
 
         IFS=';' read -ra DATA <<< "$REPLY"
 
-        # from 0.0 to 0   ...  2.3 to 2
-        DATA[1]=$(echo ${DATA[1]} | sed 's/\..*$//')  # down speed
-        DATA[3]=$(echo ${DATA[3]} | sed 's/\..*$//')  # up speed
+        # float to int 
+        DATA[1]=$(echo ${DATA[1]} | sed 's/,.*$//')  # down speed
+        DATA[3]=$(echo ${DATA[3]} | sed 's/,.*$//')  # up speed
 
-        icon $ICON_TEMP "#ffff00"
         temperature ${DATA[0]}
-
-        icon $ICON_DOWN "#06b800"
         downspeed ${DATA[1]} ${DATA[2]}
-
-        icon $ICON_UP "#53b1ff"
         upspeed ${DATA[3]} ${DATA[4]}
-
-        icon $ICON_MEM "#777777"
         memory ${DATA[5]} ${DATA[6]}
-
-        icon $ICON_CPU "#ccbb00"
         cpu ${DATA[7]}
-
-        icon $ICON_VOLUME "#00cccc"
+        battery ${DATA[8]}
         volume
 
         icon $ICON_CALENDAR "#a0a0a0"
@@ -74,6 +65,8 @@ info() {
 }
 
 temperature() {
+    icon $ICON_TEMP "#ffff00"
+
     if [[ $1 -lt 45 ]]; then
         COLOR=$GREEN
     elif [[ $1 -lt 50 ]]; then
@@ -88,6 +81,8 @@ temperature() {
 }
 
 downspeed() {
+    icon $ICON_DOWN "#06b800"
+
     if [[ $1 -lt 100 ]]; then
         COLOR=$GREEN
     elif [[ $1 -lt 300 ]]; then
@@ -104,6 +99,8 @@ downspeed() {
 }
 
 upspeed() {
+    icon $ICON_UP "#53b1ff"
+
     if [[ $1 -lt 15 ]]; then
         COLOR=$GREEN
     elif [[ $1 -lt 35 ]]; then
@@ -116,6 +113,8 @@ upspeed() {
 }
 
 memory() {
+    icon $ICON_MEM "#777777"
+
     if [[ $1 -lt 30 ]]; then
         COLOR=$GREEN
     elif [[ $1 -lt 60 ]]; then
@@ -130,11 +129,29 @@ memory() {
 }
 
 cpu() {
+    icon $ICON_CPU "#ccbb00"
+
     if [[ $1 -lt 25 ]]; then
         COLOR=$GREEN
     elif [[ $1 -lt 50 ]]; then
         COLOR=$YELLOW
     elif [[ $1 -lt 75 ]]; then
+        COLOR=$ORANGE
+    else
+        COLOR=$RED
+    fi
+
+    line "$1%"
+}
+
+battery() {
+    icon $ICON_BATTERY "#aa0096"
+
+    if [[ $1 -gt 50 ]]; then
+        COLOR=$GREEN
+    elif [[ $1 -gt 25 ]]; then
+        COLOR=$YELLOW
+    elif [[ $1 -gt 10 ]]; then
         COLOR=$ORANGE
     else
         COLOR=$RED
@@ -149,19 +166,17 @@ datetime() {
 }
 
 volume() {
-    COLOR="#00cccc"
+    icon $ICON_VOLUME "#00cccc"
     line "$(amixer sget Master,0 | egrep -m 1 -o '([0-9]+%)')"
 }
 
 mails() {
     n="$(cat $TMP_MAIL)"
-    if [[ $n -gt 0 ]]; then
-        COLOR=$ORANGE
-    else
+    if [[ $n -le 0 ]]; then
         return
     fi
 
-    icon $ICON_MAIL "#ff9933"
+    icon $ICON_MAIL $ORANGE
     line "$n"
 }
 
