@@ -81,22 +81,20 @@ alias mount-iso='sudo mount -o loop'
 alias bootime='sudo systemd-analyze'
 alias bootservice='sudo systemd-analyze blame'
 
-alias start='sudo systemctl start'
-alias restart='sudo systemctl restart'
-alias stop='sudo systemctl stop'
-
+alias alsi='alsi -a -u -c'
 # }}}
 
 # {{{ Managing
 alias pacman='pacman --color=always'
-alias update='packer -Syu'
-alias install='pacman -S'
-alias install+='packer -S'
-alias remove='sudo pacman --color always -Rsnc'
-alias search='pacman -Ss' 
-alias search+='packer -Ss' 
+alias updatep='yaourt -Syua'
+alias installp='sudo pacman --color=always -S'
+alias installp+='yaourt -S'
+alias removep='sudo pacman --color always -Rsnc'
+alias searchp='pacman -Ss' 
+alias searchp+='yaourt -Ss' 
 alias infop='pacman -Qi'
-alias unlock='rm /var/lib/pacman/db.lck'
+alias unlockp='sudo rm /var/lib/pacman/db.lck'
+alias updatem='sudo reflector -l 15 --sort age --save /etc/pacman.d/mirrorlist'
 # }}}
 
 # {{{ Multimedia
@@ -114,19 +112,22 @@ alias cp='cp -rv'
 alias mv='mv -vi'
 alias open='xdg-open'
 alias ':q'='exit'
+
+alias sstart='sudo systemctl start'
+alias srestart='sudo systemctl restart'
+alias sstop='sudo systemctl stop'
+alias sstatus='systemctl status'
+
+alias wine32='WINEARCH=win32 WINEPREFIX=~/.wine32 wine'
 # }}}
 
 # {{{ Tmux
-# [ "$TERM" = screen ] && export TERM=screen-256color
+[ "$TERM" = screen ] && export TERM=screen-256color
 
 # if [[ -z "$TMUX" ]]; then
 #         tmux 
 # fi
 # }}}
-
-alias alsi='alsi -a -u -c'
-alias mysql='mysql -uroot -p'
-alias wine32='WINEARCH=win32 WINEPREFIX=~/.wine32 wine'
 # }}}
 
 # {{{ Custom Prompt
@@ -219,6 +220,7 @@ config () {
 # {{{ Startup Functions
 #source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source ~/.zsh/zsh-syntax-highlighting/06-syntax-rules.zsh
+# surce ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # }}}
 
 # Keys {{{

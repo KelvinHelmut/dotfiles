@@ -2,23 +2,21 @@
 #
 # ~/.xprofile
 
-export DOTFILES=$HOME/.DOTFILES
+export DOTFILES="$HOME/.DOTFILES"
 
 # DAEMONS ----------------------------------------------------------------------
-# mpd --no-daemon &
-# hsetroot -solid "#000000" &
-# thunar --daemon &
+mpd --no-daemon &
+hsetroot -solid "#000000" &
 nm-applet &
 #clipit --daemon &
 
 
 # AUTOSTART --------------------------------------------------------------------
-autostart() {
-    file=$DOTFILES/$1/autostart
-    if [[ -f $file ]]; then
-        sh $file
-    else
-        notify-send 'Bienvenido!' 'No se encontró el archivo autostart "($file)"' --icon=dialog-warning
-    fi
-}
-autostart $1 &
+file=$DOTFILES/$1/autostart
+
+if [[ -f $file ]]; then
+    . "$file"
+else
+    notify-send 'Bienvenido!' "No se encontró el archivo autostart '($file)'" --icon=dialog-warning
+fi
+unset file

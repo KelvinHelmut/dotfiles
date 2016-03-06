@@ -14,7 +14,7 @@ x11-ssh-askpass.Indicator.borderWidth:  0
 ! x11-ssh-askpass.label:                  Please enter your authentication passphrase:
 
 ! URxvt*termName:                         rxvt-unicode-256color
-URxvt.font:                             xft:Dejavu Sans Mono for Powerline:pixelsize=14
+URxvt.font:                             xft:Dejavu Sans Mono for Powerline:pixelsize=12
 URxvt.geometry:                         100x30
 URxvt*scrollBar:                        false
 

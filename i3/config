@@ -2,6 +2,8 @@
 
 set $mod Mod4
 
+set $exec exec --no-startup-id
+
 font pango:Droid Sans 10px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -9,12 +11,11 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -s$USER" #i3-sensible-terminal
-bindsym Mod1+Control+t exec urxvt
+bindsym Mod1+Control+t exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
 
-# ASIGNAR LOS ESPACIOS DE TRABAJO A VARIABLES
 #=============================================
 set $WS1 1
 set $WS2 2
@@ -28,26 +29,31 @@ set $WS9 9
 set $WS0 10
 #--------------------------------------------
 
-# WINDOW CONTROL
-## Float everything
-for_window [window_role="pop-up"] floating enable,move absolute center
-for_window [class="mplayer2|Lxappearance|Gpicview|XCalc"] floating enable
-for_window [class="Pidgin"] floating enable
-for_window [title="Lista de amigos"] floating disable
+# for_window [workspace="$WS9|$WS10"] layout tabbed
+
+for_window [window_role="task_dialog|app|bubble|pop-up|page-info|Preferences"] floating enable; move absolute center
+for_window [window_type="dialog|menu"] floating enable
+for_window [class="mplayer2|MPlayer|Lxappearance|Gpicview|XCalc|feh"] floating enable
 for_window [instance="chrome_app_list"] floating enable
 
 assign [instance="Navigator|chromium|google-chrome"] $WS2
-assign [class="Gimp|Eclipse|Blender|jetbrains-studio"] $WS5
+assign [class="Pgadmin3"] $WS4
+assign [class="Gimp|Eclipse|Blender|jetbrains-studio|jetbrains-idea-ce"] $WS5
 assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
-assign [class="VirtualBox|Spotify"] $WS6
-assign [class="libreoffice*|Evince"] $WS7
+assign [class="VirtualBox"] $WS6
+assign [class="libreoffice*|Evince|Wps|Wpp|Et"] $WS7
 assign [class="Liferea|Pidgin"] $WS8
 assign [class="JDownloader"] $WS9
-assign [class="Spotify|spotify"] $WS0
-assign [instance="Spotify|spotify"] $WS0
+assign [class="Spotify"] $WS0
 
 bindsym Mod1+Tab focus right
 
+bindsym $mod+Shift+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 518
+bindsym $mod+y sticky toggle
+
+for_window [class="(?i)"] title_format "<span foreground='#C7C7C7'>***</span>%title<span foreground='#C7C7C7'>***</span> "
+
+bindsym $mod+u [urgent=latest] focus
 
 # change focus
 bindsym $mod+h focus left
@@ -62,10 +68,10 @@ bindsym $mod+Shift+K move up
 bindsym $mod+Shift+L move right
 
 # split in horizontal orientation
-# bindsym $mod+Right split horizontal
+bindsym Mod1+Right split horizontal
 
 # split in vertical orientation
-# bindsym $mod+Down split vertical
+bindsym Mod1+Down split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -116,10 +122,11 @@ bindsym $mod+Shift+8 move container to workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS0
 
-set $optconf Preciona la letra [L]reload i3    [R]reiniciar i3
+set $optconf Preciona la letra [L]reload    [R]restart    [E]exit
 mode "$optconf" {
     bindsym l reload mode "default"
     bindsym r restart mode "default"
+    bindsym e exit mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -133,7 +140,7 @@ bindsym Mod1+l resize grow width 10px or 10ppt
 bar {
     status_command ~/.i3/i3bar
     position top
-    font pango:Ubuntu Mono 12px
+    font pango:Ubuntu Mono 11px
     colors {
         statusline #000000
         background #000000
@@ -141,14 +148,14 @@ bar {
         active_workspace   #000000 #000000 #696f89
         inactive_workspace #000000 #000000 #555555
         urgent_workspace   #5a1f1e #5a1f1e #cc9393
-        #                   border  backgr  text
+#                           border  backgr  text
     }
 }
 
 #==============================
 # Borde estilo
 new_float normal
-new_window none
+new_window pixel 1
 
 #Colores
 #                       borde   backgr  texto   borde_salida
@@ -164,7 +171,7 @@ focus_follows_mouse no
 # force_focus_wrapping yes
 
 # popup en modo pantalla completa
-popup_during_fullscreen smart
+# popup_during_fullscreen smart
 
 # retrasar urgencia
 force_display_urgency_hint 500 ms
@@ -173,24 +180,35 @@ force_display_urgency_hint 500 ms
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
-
-#==============================
-# Applications
+# APPLICATIONS
 bindsym $mod+e exec nautilus
-bindsym $mod+c exec --no-startup-id xcalc
+bindsym $mod+c $exec xcalc
 
-# Actions
-# Control de mpd con ncmpcpp
-bindsym $mod+Control+Right exec ncmpcpp next
-bindsym $mod+Control+Left exec ncmpcpp prev
-bindsym $mod+p exec ncmpcpp toggle
-bindsym $mod+KP_Add exec ncmpcpp volume +5
-bindsym $mod+KP_Subtract exec ncmpcpp volume -5
-bindsym Print exec --no-startup-id $DOTFILES/scripts/screenshot
-# Control de volumen
-bindsym XF86AudioRaiseVolume exec --no-startup-id $DOTFILES/scripts/volume up
-bindsym XF86AudioLowerVolume exec --no-startup-id $DOTFILES/scripts/volume down
-bindsym XF86AudioMute exec --no-startup-id $DOTFILES/scripts/volume toggle
+# MPD MPC
+bindsym Mod1+less $exec mpc prev
+bindsym Mod1+greater $exec mpc next
+bindsym Mod1+XF86AudioMute $exec mpc toggle
+bindsym Mod1+XF86AudioRaiseVolume $exec mpc volume +5
+bindsym Mod1+XF86AudioLowerVolume $exec mpc volume -5
+
+# SCREENSHOT
+bindsym --release Print $exec $DOTFILES/scripts/screenshot -e 'feh -g 600x380 $f'
+bindsym --release $mod+Print $exec $DOTFILES/scripts/screenshot -m select -e 'feh $f'
+bindsym --release $mod+Shift+Print $exec $DOTFILES/scripts/screenshot -m focused -e 'feh -g 600x380 $f'
+
+# VOLUME
+bindsym XF86AudioRaiseVolume $exec $DOTFILES/scripts/volume up
+bindsym XF86AudioLowerVolume $exec $DOTFILES/scripts/volume down
+bindsym XF86AudioMute $exec $DOTFILES/scripts/volume toggle
+
+# BRIGHTNESS
+bindsym XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness up
+bindsym XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness down
+bindsym $mod+XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness full
+bindsym $mod+XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness off
 
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Left workspace prev_on_output
+
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1

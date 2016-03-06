@@ -6,12 +6,12 @@ _help() {
     echo "options:"
     echo -e " -m  mode [select|focused]. Default screen"
     echo -e " -p  path images. Default $path"
-    echo -e " -v  view. Requiere 'feh'"
+    echo -e " -e  APP. (view scrot -e)"
     echo -e " -h  help"
 }
 
 # VALIDATE OPTIONS {{{
-while getopts ":m:p:vh" opt; do 
+while getopts ":m:p:e:h" opt; do 
     case $opt in 
         h)
             _help; exit 0
@@ -33,8 +33,8 @@ while getopts ":m:p:vh" opt; do
                 echo "ERROR: $OPTARG is not a directory."; exit 1
             fi
             ;;
-        v)
-            view='feh -g 800x600 $f'
+        e)
+            view=$OPTARG
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2; _help; exit 1
@@ -46,7 +46,7 @@ while getopts ":m:p:vh" opt; do
 done
 # END VALIDATE OPTIONS }}}
 
-file=$(mktemp --tmpdir -u $(date +%Y-%m-%d)_XXXXX.png)
+file=$(mktemp --tmpdir -u $(date +%Y-%m-%d-%s)_XXXXX.png)
 file=$(echo $file | sed 's/.*\///')
 mkdir -p $path
 scrot $mode "$path/$file" -e "$view"

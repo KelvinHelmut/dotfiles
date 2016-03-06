@@ -1,0 +1,32 @@
+#!/bin/sh 
+
+step=5
+
+case "$1" in
+    "up")
+        xbacklight -inc $step;;
+    "down")
+        xbacklight -dec $step;;
+    "full")
+        xbacklight -set 100;;
+    "off")
+        xbacklight -set 0;;
+    *)
+        exit 0;;
+esac
+
+brightness=$(xbacklight | sed 's/\..*$//')
+
+if [[ $brightness -eq 100 ]]; then
+    icon='notification-display-brightness-full'
+elif [[ $brightness -gt 50 ]]; then
+    icon='notification-display-brightness-high'
+elif [[ $brightness -gt 10 ]]; then
+    icon='notification-display-brightness-low'
+else
+    icon='notification-display-brightness-off'
+fi
+
+killall notify-osd
+
+notify-send "Brightness" -t 800 -i $icon -h int:value:$brightness

@@ -15,12 +15,14 @@ ICON_UP=""
 ICON_DOWN=""
 ICON_TEMP=""
 ICON_MAIL=""
-ICON_PACKS=""
+ICON_PACMAN=""
 ICON_CALENDAR=""
 ICON_CLOCK=""
 ICON_VOLUME=""
 ICON_BATTERY=""
+ICON_MUSIC=""
 
+IFS=";"
 
 main() {
     GMAIL
@@ -36,19 +38,20 @@ info() {
     conky -c $CONKY | while read -r; do 
         LINE='{"full_text":""}'
 
-        IFS=';' read -ra DATA <<< "$REPLY"
+        read -ra DATA <<< "$REPLY"
 
         # float to int 
         DATA[1]=$(echo ${DATA[1]} | sed 's/,.*$//')  # down speed
         DATA[3]=$(echo ${DATA[3]} | sed 's/,.*$//')  # up speed
 
+        music_mpd ${DATA[10]}
         temperature ${DATA[0]}
         downspeed ${DATA[1]} ${DATA[2]}
         upspeed ${DATA[3]} ${DATA[4]}
         memory ${DATA[5]} ${DATA[6]}
         cpu ${DATA[7]}
         battery ${DATA[8]}
-        volume
+        volume ${DATA[9]} # system and mpd
 
         icon $ICON_CALENDAR "#a0a0a0"
         datetime '%A, %d de %B'
@@ -145,7 +148,7 @@ cpu() {
 }
 
 battery() {
-    icon $ICON_BATTERY "#aa0096"
+    icon $ICON_BATTERY "#333333"
 
     if [[ $1 -gt 50 ]]; then
         COLOR=$GREEN
@@ -167,7 +170,18 @@ datetime() {
 
 volume() {
     icon $ICON_VOLUME "#00cccc"
-    line "$(amixer sget Master,0 | egrep -m 1 -o '([0-9]+%)')"
+    line "$(amixer sget Master,0 | egrep -m 1 -o '([0-9]+%)')" ', "separator_block_width":5'
+    COLOR="#a80066"
+    line "$1%"
+}
+
+music_mpd() {
+    icon $ICON_MUSIC "#aa0096"
+    COLOR="#a80066"
+    if [[ $1 == "OFF" ]]; then
+        COLOR=$RED
+    fi
+    line "$1" ', "min_width":350'
 }
 
 mails() {
@@ -186,7 +200,7 @@ packages() {
         return
     fi
 
-    icon $ICON_PACKS "#ffe200"
+    icon $ICON_PACMAN "#ffe200"
     line "$n"
 }
 
@@ -213,7 +227,7 @@ icon() {
 }
 
 line() {
-    LINE=$LINE',{"full_text":"'$1'", "color":"'$COLOR'", "separator":false '$2'}'
+    LINE=$LINE',{"full_text":"'$1'", "color":"'$COLOR'", "separator":false, "separator_block_width":15 '$2'}'
 }
 
 

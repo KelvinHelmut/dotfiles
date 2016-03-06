@@ -4,7 +4,7 @@ timeout=5
 request=count
 
 getmailxml() {
-    echo $(curl -n -m $timeout https://mail.google.com/mail/feed/atom)
+    echo $(curl -s -n -m $timeout https://mail.google.com/mail/feed/atom)
 }
 
 getmailcount() {

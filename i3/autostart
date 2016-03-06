@@ -1,14 +1,10 @@
 #! /bin/sh
 
 #DAEMONS -----------------------------------------------------------------------
-feh --bg-fill $DOTFILES/i3/background.png --no-fehbg
+feh --bg-fill $DOTFILES/i3/background --no-fehbg &
 compton --config $DOTFILES/compton.conf -b &
+synapse --startup &
 redshift -l -16.3988:-71.5369 &
-xss-lock -- $DOTFILES/i3/i3lock &
-
-while : ; do 
-    synapse --startup
-done &
 
 
 #APPLICATIONS ------------------------------------------------------------------
