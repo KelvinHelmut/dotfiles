@@ -34,17 +34,17 @@ set $WS0 10
 for_window [window_role="task_dialog|app|bubble|pop-up|page-info|Preferences"] floating enable; move absolute center
 for_window [window_type="dialog|menu"] floating enable
 for_window [class="mplayer2|MPlayer|Lxappearance|Gpicview|XCalc|feh"] floating enable
-for_window [instance="chrome_app_list"] floating enable
+for_window [instance="chrome_app_list|Camara"] floating enable
 
 assign [instance="Navigator|chromium|google-chrome"] $WS2
+assign [class="MComix"] $WS3
 assign [class="Pgadmin3"] $WS4
-assign [class="Gimp|Eclipse|Blender|jetbrains-studio|jetbrains-idea-ce"] $WS5
+assign [class="Eclipse|Blender|jetbrains-studio|jetbrains-idea-ce|Atom|Code"] $WS5
 assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
-assign [class="VirtualBox"] $WS6
+assign [class="VirtualBox|Gimp"] $WS6
 assign [class="libreoffice*|Evince|Wps|Wpp|Et"] $WS7
-assign [class="Liferea|Pidgin"] $WS8
 assign [class="JDownloader"] $WS9
-assign [class="Spotify"] $WS0
+assign [class="Spotify|Franz|Liferea"] $WS0
 
 bindsym Mod1+Tab focus right
 
@@ -67,11 +67,9 @@ bindsym $mod+Shift+J move down
 bindsym $mod+Shift+K move up
 bindsym $mod+Shift+L move right
 
-# split in horizontal orientation
-bindsym Mod1+Right split horizontal
-
-# split in vertical orientation
-bindsym Mod1+Down split vertical
+# split in horizontal/vertical orientation
+bindsym Mod1+Control+Right split horizontal
+bindsym Mod1+Control+Down split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -192,9 +190,9 @@ bindsym Mod1+XF86AudioRaiseVolume $exec mpc volume +5
 bindsym Mod1+XF86AudioLowerVolume $exec mpc volume -5
 
 # SCREENSHOT
-bindsym --release Print $exec $DOTFILES/scripts/screenshot -e 'feh -g 600x380 $f'
-bindsym --release $mod+Print $exec $DOTFILES/scripts/screenshot -m select -e 'feh $f'
-bindsym --release $mod+Shift+Print $exec $DOTFILES/scripts/screenshot -m focused -e 'feh -g 600x380 $f'
+bindsym --release Print $exec $DOTFILES/scripts/screenshot -e 'xdg-open $f'
+bindsym --release $mod+Print $exec $DOTFILES/scripts/screenshot -m select -e 'xdg-open $f'
+bindsym --release $mod+Shift+Print $exec $DOTFILES/scripts/screenshot -m focused -e 'xdg-open $f'
 
 # VOLUME
 bindsym XF86AudioRaiseVolume $exec $DOTFILES/scripts/volume up

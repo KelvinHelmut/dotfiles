@@ -86,15 +86,15 @@ alias alsi='alsi -a -u -c'
 
 # {{{ Managing
 alias pacman='pacman --color=always'
-alias updatep='yaourt -Syua'
-alias installp='sudo pacman --color=always -S'
-alias installp+='yaourt -S'
-alias removep='sudo pacman --color always -Rsnc'
-alias searchp='pacman -Ss' 
-alias searchp+='yaourt -Ss' 
-alias infop='pacman -Qi'
-alias unlockp='sudo rm /var/lib/pacman/db.lck'
-alias updatem='sudo reflector -l 15 --sort age --save /etc/pacman.d/mirrorlist'
+alias psearch='pacman -Ss' 
+alias pinstall='sudo pacman --color=always -S'
+alias premove='sudo pacman --color always -Rsnc'
+alias pinfo='pacman -Qi'
+alias ysearch='yaourt -Ss' 
+alias yinstall='yaourt -S'
+alias pupdate='yaourt -Syua'
+alias punlock='sudo rm /var/lib/pacman/db.lck'
+alias mupdate='sudo reflector -l 15 --sort age --save /etc/pacman.d/mirrorlist'
 # }}}
 
 # {{{ Multimedia
@@ -265,3 +265,6 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 # }}}
+
+export PATH=$PATH:/home/aek6/.gem/ruby/2.3.0/bin
+export PATH=$PATH:/opt/google_appengine/

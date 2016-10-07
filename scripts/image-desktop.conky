@@ -13,7 +13,7 @@
 #  =============================================================================
 
 SLEEP_=120
-PATH_IMG=~/Imágenes/Fondos
+PATH_IMG=~/Imágenes
 # FONDO_=~/.aek6/scripts/img/fondo2-conky.png
 BORDER_=1
 BG_=1       # 1: change background

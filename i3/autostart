@@ -1,10 +1,10 @@
 #! /bin/sh
 
 #DAEMONS -----------------------------------------------------------------------
-feh --bg-fill $DOTFILES/i3/background --no-fehbg &
+hsetroot -solid '#505050' -fill $DOTFILES/i3/background &
 compton --config $DOTFILES/compton.conf -b &
-synapse --startup &
 redshift -l -16.3988:-71.5369 &
+albert &
 
 
 #APPLICATIONS ------------------------------------------------------------------
