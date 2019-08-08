@@ -37,14 +37,12 @@ for_window [class="mplayer2|MPlayer|Lxappearance|Gpicview|XCalc|feh"] floating e
 for_window [instance="chrome_app_list|Camara"] floating enable
 
 assign [instance="Navigator|chromium|google-chrome"] $WS2
-assign [class="MComix"] $WS3
-assign [class="Pgadmin3"] $WS4
-assign [class="Eclipse|Blender|jetbrains-studio|jetbrains-idea-ce|Atom|Code"] $WS5
+assign [class="Pgadmin3|Dia|Staruml"] $WS4
+assign [class="Eclipse|Code|jetbrains-idea-ce|Unity"] $WS5
 assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
 assign [class="VirtualBox|Gimp"] $WS6
-assign [class="libreoffice*|Evince|Wps|Wpp|Et"] $WS7
-assign [class="JDownloader"] $WS9
-assign [class="Spotify|Franz|Liferea"] $WS0
+assign [class="libreoffice*|Latexila|Evince|Wps|Wpp|Et"] $WS7
+assign [class="Spotify|Franz|Liferea|MComix|JDownloader"] $WS0
 
 bindsym Mod1+Tab focus right
 
@@ -208,5 +206,7 @@ bindsym $mod+XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness off
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Left workspace prev_on_output
 
-floating_minimum_size 75 x 50
+floating_minimum_size 220 x 90
 floating_maximum_size -1 x -1
+
+bindsym $mod+space $exec rofi -combi-modi window#drun#ssh -show combi

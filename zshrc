@@ -128,6 +128,9 @@ alias wine32='WINEARCH=win32 WINEPREFIX=~/.wine32 wine'
 #         tmux 
 # fi
 # }}}
+
+alias stanfordcorenlp='cd ~/Dev/bin/stanford-corenlp && java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -annotators "tokenize,ssplit,pos,lemma,parse,sentiment" -port 9000 -timeout 50000 -serverProperties StanfordCoreNLP-spanish.properties'
+
 # }}}
 
 # {{{ Custom Prompt
@@ -266,5 +269,3 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 fi
 # }}}
 
-export PATH=$PATH:/home/aek6/.gem/ruby/2.3.0/bin
-export PATH=$PATH:/opt/google_appengine/

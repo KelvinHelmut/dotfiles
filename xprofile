@@ -2,11 +2,14 @@
 #
 # ~/.xprofile
 
+# BLACK SCREEN
+hsetroot -solid "#000000" &
+
+export SSH_ASKPASS=ssh-askpass
 export DOTFILES="$HOME/.DOTFILES"
 
 # DAEMONS ----------------------------------------------------------------------
 mpd --no-daemon &
-hsetroot -solid "#000000" &
 nm-applet &
 #clipit --daemon &
 
@@ -17,6 +20,6 @@ file=$DOTFILES/$1/autostart
 if [[ -f $file ]]; then
     . "$file"
 else
-    notify-send 'Bienvenido!' "No se encontró el archivo autostart '($file)'" --icon=dialog-warning
+    notify-send 'Welcome!' "Not found file autostart '($file)'" --icon=dialog-warning
 fi
 unset file
