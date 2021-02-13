@@ -7,9 +7,10 @@ hsetroot -solid "#000000" &
 
 export SSH_ASKPASS=ssh-askpass
 export DOTFILES="$HOME/.DOTFILES"
+export $(dbus-launch)
 
 # DAEMONS ----------------------------------------------------------------------
-mpd --no-daemon &
+#mpd --no-daemon &
 nm-applet &
 #clipit --daemon &
 

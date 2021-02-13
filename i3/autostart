@@ -1,12 +1,10 @@
 #! /bin/sh
 
 #DAEMONS -----------------------------------------------------------------------
-#hsetroot -solid '#101010' -center $DOTFILES/i3/background &
-/home/aek6/fondo_d.sh /home/aek6/Descargas/pieces_chess_boards_glass_68430_1600x900.jpg &
+hsetroot -solid '#101010' -fill $DOTFILES/i3/background &
 compton --config $DOTFILES/compton.conf -b &
 redshift -l -16.3988:-71.5369 &
-albert &
+rofi -combi-modi window#drun#ssh -show combi &
 
 
 #APPLICATIONS ------------------------------------------------------------------
-#(sleep 15 && pidgin) &

@@ -12,7 +12,9 @@ ${upspeedf wlp9s0};${upspeed wlp9s0};\
 ${memperc};${memeasyfree};\
 ${cpu cpu0};\
 ${battery_percent BAT1};\
-${mpd_vol};\
-${if_mpd_playing}${mpd_smart 100} ${mpd_elapsed}/${mpd_length} \
-${else}OFF${endif}
+#${mpd_vol};\
+#${if_mpd_playing}${mpd_smart 100} ${mpd_elapsed}/${mpd_length} \
+#${else}OFF${endif}
+0;-
+
 ]]

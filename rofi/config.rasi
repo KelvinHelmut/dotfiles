@@ -1,0 +1,7 @@
+/* Rofi config file */
+configuration {
+    lines: 12;
+    font: "Source Sans Pro 12";
+    show-icons: true;
+    theme: "slate";
+}

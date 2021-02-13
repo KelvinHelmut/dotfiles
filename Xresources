@@ -1,42 +1,8 @@
-! x11-ssh-askpass ------------------------------------------------------------
+!! Colorscheme  ------------------------------------------------------------
 
-x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-x11-ssh-askpass*background:             #000000
-x11-ssh-askpass*foreground:             #ffffff
-x11-ssh-askpass.Button*background:      #000000
-x11-ssh-askpass.Indicator*foreground:   #777777
-x11-ssh-askpass.Indicator*background:   #111111
-x11-ssh-askpass*topShadowColor:         #000000
-x11-ssh-askpass*bottomShadowColor:      #000000
-x11-ssh-askpass.*borderWidth:           1
-x11-ssh-askpass.Indicator.borderWidth:  0
-! x11-ssh-askpass.title:                  OpenSSH Authentication Passphrase Request
-! x11-ssh-askpass.label:                  Please enter your authentication passphrase:
-
-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-ssh-askpass*background:             #000000
-ssh-askpass*foreground:             #ffffff
-ssh-askpass.Button*background:      #000000
-ssh-askpass.Indicator*foreground:   #333333
-ssh-askpass.Indicator*background:   #111111
-ssh-askpass*topShadowColor:         #000000
-ssh-askpass*bottomShadowColor:      #000000
-ssh-askpass.*borderWidth:           1
-ssh-askpass.Indicator.borderWidth:  0
-
-! URxvt*termName:                         rxvt-unicode-256color
-URxvt.font:                             xft:Dejavu Sans Mono for Powerline:pixelsize=12
-URxvt.geometry:                         100x30
-URxvt*scrollBar:                        false
-
-urxvt*fading: 40
-urxvt*fadeColor: #000000
-
-!*background: #151515
-URxvt.depth:                            32
-URxvt.background:                       rgba:0000/0000/0000/dddd
-*foreground:                            #ffffff
-
+*.foreground: #93a1a1
+*.background: #141c21
+*.cursorColor: #afbfbf
 *color0:                                #000000
 *color1:                                #aa0000
 *color2:                                #007000
@@ -54,117 +20,41 @@ URxvt.background:                       rgba:0000/0000/0000/dddd
 *color14:                               #37ffff
 *color15:                               #ffffff
 
-*saveLines:                             1000
-! *cursorBlink:       true
-! *cursorUnderline:   true
-!
-! color a las paginas del manual
-! *VT100.colorBDMode:                     true
-! *VT100.colorBD:                         red
-! *VT100.colorULMode:                     true
-! *VT100.colorUL:                         cyan
-! *VT100.veryBoldColors:                  6
 
-! URxvt.colorIT:                          #87af5f
-! URxvt.colorBD:                          #d7d7d7
+!! URxvt Appearance  ------------------------------------------------------------
+
+URxvt.font:                             xft:Dejavu Sans Mono for Powerline:pixelsize=12
+URxvt.geometry:                         100x30
+URxvt*scrollBar:                        false
+urxvt*fading: 40
+urxvt*fadeColor: #000000
+URxvt.depth:                            32
+URxvt.background:                      rgba:1414/1c1c/2121/fb00
 URxvt.colorUL:                          #87afd7
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.internalBorder: 10
+URxvt.cursorBlink: false
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.iso14755: false
 
 
+! x11-ssh-askpass ------------------------------------------------------------
 
-
-! Xterm.faceName:                         xft:Dejavu Sans Mono for Powerline:pixelsize=14
-! Xterm.background:                       rgba:0000/0000/0000/bbbb
-
-
-
-
-! xcalc-----------------------------------------------------------------------
-
-xcalc*geometry:                        400x475
-xcalc.ti.bevel.background:             #111111
-xcalc.ti.bevel.screen.background:      #000000
-xcalc.ti.bevel.screen.DEG.background:  #000000
-xcalc.ti.bevel.screen.DEG.foreground:  LightSeaGreen
-xcalc.ti.bevel.screen.GRAD.background: #000000
-xcalc.ti.bevel.screen.GRAD.foreground: LightSeaGreen
-xcalc.ti.bevel.screen.RAD.background:  #000000
-xcalc.ti.bevel.screen.RAD.foreground:  LightSeaGreen
-xcalc.ti.bevel.screen.INV.background:  #000000
-xcalc.ti.bevel.screen.INV.foreground:  Red
-xcalc.ti.bevel.screen.LCD.background:  #000000
-xcalc.ti.bevel.screen.LCD.foreground:  LightSeaGreen
-xcalc.ti.bevel.screen.LCD.shadowWidth: 0
-xcalc.ti.bevel.screen.M.background:    #000000
-xcalc.ti.bevel.screen.M.foreground:    LightSeaGreen
-xcalc.ti.bevel.screen.P.background:    #000000
-xcalc.ti.bevel.screen.P.foreground:    Yellow
-xcalc.ti.Command.foreground:  White
-xcalc.ti.Command.background:  #777777
-xcalc.ti.button5.background:  Orange3
-xcalc.ti.button19.background: #611161
-xcalc.ti.button18.background: #611161
-xcalc.ti.button20.background: #611111
-!uncomment to change label on division button
-xcalc.ti.button20.label:      /
-xcalc.ti.button25.background: #722222
-xcalc.ti.button30.background: #833333
-xcalc.ti.button35.background: #944444
-xcalc.ti.button40.background: #a55555
-xcalc.ti.button22.background: #222262
-xcalc.ti.button23.background: #222262
-xcalc.ti.button24.background: #222272
-xcalc.ti.button27.background: #333373
-xcalc.ti.button28.background: #333373
-xcalc.ti.button29.background: #333373
-xcalc.ti.button32.background: #444484
-xcalc.ti.button33.background: #444484
-xcalc.ti.button34.background: #444484
-xcalc.ti.button37.background: #555595
-xcalc.ti.button38.background: #555595
-xcalc.ti.button39.background: #555595
-XCalc*Cursor:                 hand2
-XCalc*ShapeStyle:             rectangle
-XCalc*background: #000000
-
-
-! xscreensaver ---------------------------------------------------------------
-
-!font settings
-xscreensaver.Dialog.headingFont:        -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:           -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:          -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:          -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:         -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:           -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:         -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
-!general dialog box (affects main hostname, username, password text)
-xscreensaver.Dialog.foreground:         #aaaaaa
-xscreensaver.Dialog.background:         #111111
-xscreensaver.Dialog.topShadowColor:     #111111
-xscreensaver.Dialog.bottomShadowColor:  #111111
-xscreensaver.Dialog.Button.foreground:  #888888
-xscreensaver.Dialog.Button.background:  #222222
-!username/password input box and date text colour
-xscreensaver.Dialog.text.foreground:    #777777
-xscreensaver.Dialog.text.background:    #000000
-xscreensaver.Dialog.internalBorderWidth:50
-xscreensaver.Dialog.borderWidth:        0
-xscreensaver.Dialog.shadowThickness:    2
-!timeout bar (background is actually determined by Dialog.text.background)
-xscreensaver.passwdTimeout: 0:00:10
-xscreensaver.passwd.thermometer.foreground:  #00ddff
-xscreensaver.passwd.thermometer.background:  #000000
-xscreensaver.passwd.thermometer.width:       3
-!datestamp format--see the strftime(3) manual page for details
-xscreensaver.dateFormat: %Y-%m-%d   %I:%M%P
-
-xscreensaver.newLoginCommand: dm-tool switch-to-greeter
-
-xscreensaver.passwd.heading.label: 
-xscreensaver.passwd.body.label: Bloqueado.
-xscreensaver.passwd.unlock.label: OK
-xscreensaver.passwd.login.label: Cambiar Usuario
-xscreensaver.passwd.user.label: Usuario:
-
-xscreensaver.Dialog.logo.width: 110
-xscreensaver.Dialog.logo.height: 110
+x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+x11-ssh-askpass*background:             #000000
+x11-ssh-askpass*foreground:             #ffffff
+x11-ssh-askpass.Button*background:      #000000
+x11-ssh-askpass.Indicator*foreground:   #777777
+x11-ssh-askpass.Indicator*background:   #111111
+x11-ssh-askpass*topShadowColor:         #000000
+x11-ssh-askpass*bottomShadowColor:      #000000
+x11-ssh-askpass.*borderWidth:           1
+x11-ssh-askpass.Indicator.borderWidth:  0
+! x11-ssh-askpass.title:                  OpenSSH Authentication Passphrase Request
+! x11-ssh-askpass.label:                  Please enter your authentication passphrase:
+ssh-askpass.Indicator*foreground:   #333333

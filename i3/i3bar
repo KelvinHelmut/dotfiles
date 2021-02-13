@@ -25,7 +25,7 @@ ICON_MUSIC=""
 IFS=";"
 
 main() {
-    GMAIL
+    # GMAIL
     PACMAN
 
     echo '{ "version": 1 }'
@@ -58,7 +58,7 @@ info() {
         icon $ICON_CLOCK "#eeeeee"
         datetime '%I:%M %P'
 
-        mails
+        # mails
         packages
 
         line '' ', "separator_block_width":10'

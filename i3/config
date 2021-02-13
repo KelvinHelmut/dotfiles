@@ -38,7 +38,7 @@ for_window [instance="chrome_app_list|Camara"] floating enable
 
 assign [instance="Navigator|chromium|google-chrome"] $WS2
 assign [class="Pgadmin3|Dia|Staruml"] $WS4
-assign [class="Eclipse|Code|jetbrains-idea-ce|Unity"] $WS5
+assign [class="Eclipse|code-oss|jetbrains-idea-ce|Unity"] $WS5
 assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
 assign [class="VirtualBox|Gimp"] $WS6
 assign [class="libreoffice*|Latexila|Evince|Wps|Wpp|Et"] $WS7
@@ -49,7 +49,9 @@ bindsym Mod1+Tab focus right
 bindsym $mod+Shift+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 518
 bindsym $mod+y sticky toggle
 
-for_window [class="(?i)"] title_format "<span foreground='#C7C7C7'>***</span>%title<span foreground='#C7C7C7'>***</span> "
+for_window [class=".*"] title_format "<span size='smaller'> %title </span>"
+title_align center
+
 
 bindsym $mod+u [urgent=latest] focus
 
@@ -150,15 +152,15 @@ bar {
 
 #==============================
 # Borde estilo
-new_float normal
-new_window pixel 1
+default_floating_border normal
+default_border pixel 1
 
 #Colores
 #                       borde   backgr  texto   borde_salida
-client.focused          #000000 #000000 #ffffff #900000
+client.focused          #222d32 #222d32 #b8c2c6 #20c4d9
 client.urgent           #5a1f1e #5a1f1e #cc9393
-client.focused_inactive #000000 #000000 #999999
-client.unfocused        #000000 #000000 #555555 
+client.focused_inactive #222d32 #222d32 #999999
+client.unfocused        #222d32e5 #222d32e5 #444d54 
 
 # mouse
 focus_follows_mouse no 
@@ -188,9 +190,10 @@ bindsym Mod1+XF86AudioRaiseVolume $exec mpc volume +5
 bindsym Mod1+XF86AudioLowerVolume $exec mpc volume -5
 
 # SCREENSHOT
-bindsym --release Print $exec $DOTFILES/scripts/screenshot -e 'xdg-open $f'
-bindsym --release $mod+Print $exec $DOTFILES/scripts/screenshot -m select -e 'xdg-open $f'
-bindsym --release $mod+Shift+Print $exec $DOTFILES/scripts/screenshot -m focused -e 'xdg-open $f'
+bindsym --release Print $exec flameshot gui
+# bindsym --release Print $exec $DOTFILES/scripts/screenshot -e 'xdg-open $f'
+# bindsym --release $mod+Print $exec $DOTFILES/scripts/screenshot -m select -e 'xdg-open $f'
+# bindsym --release $mod+Shift+Print $exec $DOTFILES/scripts/screenshot -m focused -e 'xdg-open $f'
 
 # VOLUME
 bindsym XF86AudioRaiseVolume $exec $DOTFILES/scripts/volume up
@@ -209,4 +212,4 @@ bindsym $mod+Left workspace prev_on_output
 floating_minimum_size 220 x 90
 floating_maximum_size -1 x -1
 
-bindsym $mod+space $exec rofi -combi-modi window#drun#ssh -show combi
+bindsym $mod+space $exec rofi -show combi
