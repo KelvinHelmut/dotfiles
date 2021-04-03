@@ -16,9 +16,12 @@ esac
 muted=$(echo $volume | tail -n1 | sed -E 's/.*\[([a-z]+)\]/\1/')
 volume=$(echo $volume | tail -n1 | sed -E 's/.*\[([0-9]+)\%\].*/\1/')
 
-killall notify-osd
 if [[ $muted == "off" ]]; then
-    notify-send "Muted" -t 1000 -i notification-audio-volume-muted -h int:value:$volume
+    icon='notification-audio-volume-muted'
 else
-    notify-send "Volume" -t 800 -i notification-audio-volume-medium -h int:value:$volume
+    icon='notification-audio-volume-medium'
 fi
+
+notify-send 'Volume' -t 800 -i $icon \
+            -h int:value:$volume \
+            -h string:x-canonical-private-synchronous:volume

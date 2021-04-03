@@ -4,13 +4,13 @@ configuration {
     lines: 4;
     window-format: "[{w}] :: {c} :: {t}";
     
-    display-window: "";
+    display-window: "";
     display-windowcd: "";
-    display-run: "";
+    display-run: "";
     display-ssh: "";
     display-drun: "";
-    display-calc: "=";
-    display-combi: "";
+    display-calc: "";
+    display-combi: "";
 }
 
 * {
@@ -59,4 +59,8 @@ element selected {
 
 element-icon {
   size: 2.2ch;
+}
+
+element-text {
+  margin: 1px 0 0 8px;
 }

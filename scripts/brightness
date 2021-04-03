@@ -27,6 +27,6 @@ else
     icon='notification-display-brightness-off'
 fi
 
-killall notify-osd
-
-notify-send "Brightness" -t 800 -i $icon -h int:value:$brightness
+notify-send 'Brightness' -t 800 -i $icon \
+            -h int:value:$brightness \
+            -h string:x-canonical-private-synchronous:brightness

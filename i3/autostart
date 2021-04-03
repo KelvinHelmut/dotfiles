@@ -1,10 +1,5 @@
 #! /bin/sh
 
-#DAEMONS -----------------------------------------------------------------------
 hsetroot -solid '#101010' -fill $DOTFILES/i3/background &
-compton --config $DOTFILES/compton.conf -b &
-redshift -l -16.3988:-71.5369 &
-rofi -combi-modi window#drun#ssh -show combi &
-
-
-#APPLICATIONS ------------------------------------------------------------------
+picom &
+rofi -show combi &

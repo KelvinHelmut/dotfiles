@@ -1,100 +1,125 @@
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# ~/.config/i3/config
 
 set $mod Mod4
-
 set $exec exec --no-startup-id
 
-font pango:Droid Sans 10px
+set $up k
+set $down j
+set $left h
+set $right l
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -s$USER" #i3-sensible-terminal
+bindsym $mod+Return exec alacritty -e bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -s 0"
 bindsym Mod1+Control+t exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
 
-#=============================================
-set $WS1 1
-set $WS2 2
-set $WS3 3
-set $WS4 4
-set $WS5 5
-set $WS6 6
-set $WS7 7
-set $WS8 8
-set $WS9 9
-set $WS0 10
-#--------------------------------------------
+# start launcher
+bindsym $mod+space $exec rofi -show combi
 
-# for_window [workspace="$WS9|$WS10"] layout tabbed
+# run apps
+bindsym $mod+e exec nautilus
 
-for_window [window_role="task_dialog|app|bubble|pop-up|page-info|Preferences"] floating enable; move absolute center
-for_window [window_type="dialog|menu"] floating enable
-for_window [class="mplayer2|MPlayer|Lxappearance|Gpicview|XCalc|feh"] floating enable
-for_window [instance="chrome_app_list|Camara"] floating enable
+# screenshot
+bindsym --release Print $exec flameshot gui
+bindsym --release $mod+Print $exec sleep 3 && flameshot gui
 
-assign [instance="Navigator|chromium|google-chrome"] $WS2
-assign [class="Pgadmin3|Dia|Staruml"] $WS4
-assign [class="Eclipse|code-oss|jetbrains-idea-ce|Unity"] $WS5
-assign [title="Eclipse |Eclipse|SDK de Eclipse " class="Java"] $WS5
-assign [class="VirtualBox|Gimp"] $WS6
-assign [class="libreoffice*|Latexila|Evince|Wps|Wpp|Et"] $WS7
-assign [class="Spotify|Franz|Liferea|MComix|JDownloader"] $WS0
+# volume
+bindsym XF86AudioRaiseVolume $exec $DOTFILES/scripts/volume up
+bindsym XF86AudioLowerVolume $exec $DOTFILES/scripts/volume down
+bindsym XF86AudioMute $exec $DOTFILES/scripts/volume toggle
 
-bindsym Mod1+Tab focus right
+# brightness
+bindsym XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness up
+bindsym XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness down
+bindsym $mod+XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness full
+bindsym $mod+XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness off
 
-bindsym $mod+Shift+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 518
-bindsym $mod+y sticky toggle
-
-for_window [class=".*"] title_format "<span size='smaller'> %title </span>"
-title_align center
-
-
-bindsym $mod+u [urgent=latest] focus
+# chromecast wallpaper
+bindsym $mod+w $exec $DOTFILES/scripts/chromecast_wallpaper.py next
+bindsym $mod+Shift+w $exec $DOTFILES/scripts/chromecast_wallpaper.py prev
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# change focus to urgency
+bindsym $mod+u [urgent=latest] focus
 
 # move focused window
-bindsym $mod+Shift+H move left
-bindsym $mod+Shift+J move down
-bindsym $mod+Shift+K move up
-bindsym $mod+Shift+L move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# resize window
+bindsym Mod1+h resize shrink width 10px or 10ppt
+bindsym Mod1+j resize grow height 10px or 10ppt
+bindsym Mod1+k resize shrink height 10px or 10ppt
+bindsym Mod1+l resize grow width 10px or 10ppt
 
 # split in horizontal/vertical orientation
-bindsym Mod1+Control+Right split horizontal
-bindsym Mod1+Control+Down split vertical
+bindsym $mod+Control+Right split horizontal
+bindsym $mod+Control+Down split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
-#bindsym $mod+Shift+f fullscreen global
+bindsym $mod+Shift+f fullscreen global
 
-# change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+y layout stacking
-# bindsym $mod+u layout tabbed
-#bindsym $mod+d layout toggle split
-bindsym $mod+i layout toggle 
+# change container layout
+bindsym $mod+t layout toggle splith splitv tabbed
 
 # toggle tiling / floating
-bindsym $mod+s floating toggle
+bindsym $mod+z floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Tab focus mode_toggle
+bindsym Mod1+Tab focus mode_toggle
+
+# change focus next/prev window
+bindsym $mod+Tab focus next
+bindsym $mod+Shift+Tab focus prev
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+p focus parent
 
 # focus the child container
-bindsym $mod+d focus child
+bindsym $mod+o focus child
 
-workspace_auto_back_and_forth yes
-bindsym $mod+Escape workspace back_and_forth
+# scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+
+# sticky window
+bindsym $mod+Shift+y fullscreen disable; floating enable; resize set 422 240; sticky enable; move position 933 518
+bindsym $mod+y sticky toggle
+
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $WS1 1:<span font='8' rise='2000'>1 </span><span fgcolor='#64d600' font='12'> </span>
+set $WS2 2:<span font='8' rise='2000'>2 </span><span fgcolor='#a4ad00' font='12'>爵 </span>
+set $WS3 3:<span font='8' rise='2000'>3 </span><span fgcolor='orange' font='12'> </span>
+set $WS4 4:<span font='8' rise='2000'>4 </span><span fgcolor='#ff0088' font='12'> </span>
+set $WS5 5:<span font='8' rise='1000'>5 </span><span fgcolor='#00a365' font='11'> </span>
+set $WS6 6:<span font='8' rise='2000'>6 </span><span fgcolor='#005eff' font='12'> </span>
+set $WS7 7:<span font='8' rise='1000'>7 </span><span fgcolor='#b50000' font='11'> </span>
+set $WS8 8:<span font='8' rise='1000'>8 </span><span fgcolor='white' font='11'> </span>
+set $WS9 9:<span font='8' rise='2000'>9 </span><span fgcolor='#06b300' font='12'>阮 </span>
+set $WS0 10:<span font='8' rise='2000'>10 </span><span fgcolor='#c700d1' font='12'>聆 </span>
+# set $WS1 "1"
+# set $WS2 "2"
+# set $WS3 "3"
+# set $WS4 "4"
+# set $WS5 "5"
+# set $WS6 "6"
+# set $WS7 "7"
+# set $WS8 "8"
+# set $WS9 "9"
+# set $WS0 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -120,6 +145,96 @@ bindsym $mod+Shift+8 move container to workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS0
 
+# focus next/prev workspace
+bindsym $mod+Right workspace next_on_output
+bindsym $mod+Left workspace prev_on_output
+
+# focus last focused workspace
+bindsym $mod+Escape workspace back_and_forth
+
+
+# layout mode for containers
+workspace_layout tabbed
+
+assign [instance="Navigator|chromium|google-chrome"] $WS2
+assign [class=".*Nautilus|File-roller"] $WS3
+assign [class="code-oss"] $WS4
+assign [class="DBeaver|GitKraken"] $WS5
+assign [class="Java" window_type="splash"] $WS5
+assign [class="Wps|Wpp|Et|Latexila"] $WS6
+assign [class="Gimp"] $WS7
+assign [class="JDownloader"] $WS8
+assign [class="Spotify"] $WS9
+assign [instance="spotify"] $WS9
+assign [class="Slack"] $WS0
+
+for_window [window_role="task_dialog|app|bubble|pop-up|page-info|Preferences"] floating enable; move absolute center
+for_window [window_type="dialog|menu"] floating enable
+for_window [class="mplayer2|MPlayer|Lxappearance|Gpicview"] floating enable
+for_window [instance="chrome_app_list|Camara"] floating enable
+
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Ubuntu Light 0px
+
+# mouse
+focus_follows_mouse no
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# floating window max/min size
+floating_minimum_size 220 x 90
+floating_maximum_size -1 x -1
+
+# delay urgency
+force_display_urgency_hint 500 ms
+
+# enable go to last focused workspace
+workspace_auto_back_and_forth yes
+
+# title style
+title_align center
+
+# border style
+default_floating_border pixel 2
+default_border pixel 0
+# for_window [floating] title_format "<span size='10000'>%title</span>"
+
+# colors
+client.focused          #00bbeebb   #00bbeebb   #00bbeebb   #20c4d9     #222d32
+client.urgent           #5a1f1e     #5a1f1e     #cc9393
+client.focused_inactive #222d32     #222d32     #999999
+client.unfocused        #222d3277   #222d3277   #999999
+                        # border    backgr      texto       indicator   border
+
+# gaps
+gaps inner 6
+bindsym $mod+g gaps inner current toggle 6
+
+
+# status bar
+bar {
+    i3bar_command i3bar -t
+    status_command ~/.config/i3/status_bar.sh
+    position top
+    font pango:mononoki Nerd Font 20px
+    height 24
+    strip_workspace_numbers yes
+    colors {
+        statusline #000000
+        background #171717bb
+        focused_workspace   #06181a #06181a #00bbee
+        active_workspace    #222222 #222222 #696f89
+        inactive_workspace  #222222 #222222 #676777
+        urgent_workspace    #5a1f1e #5a1f1e #cc9393
+                            # border  backgr  text
+    }
+}
+
+
+# mode for reload config, restart and exit
 set $optconf Preciona la letra [L]reload    [R]restart    [E]exit
 mode "$optconf" {
     bindsym l reload mode "default"
@@ -130,86 +245,3 @@ mode "$optconf" {
 }
 bindsym $mod+Shift+r mode "$optconf"
 
-bindsym Mod1+h resize shrink width 10px or 10ppt
-bindsym Mod1+j resize grow height 10px or 10ppt
-bindsym Mod1+k resize shrink height 10px or 10ppt
-bindsym Mod1+l resize grow width 10px or 10ppt
-
-bar {
-    status_command ~/.i3/i3bar
-    position top
-    font pango:Ubuntu Mono 11px
-    colors {
-        statusline #000000
-        background #000000
-        focused_workspace  #000000 #000000 #00bbee
-        active_workspace   #000000 #000000 #696f89
-        inactive_workspace #000000 #000000 #555555
-        urgent_workspace   #5a1f1e #5a1f1e #cc9393
-#                           border  backgr  text
-    }
-}
-
-#==============================
-# Borde estilo
-default_floating_border normal
-default_border pixel 1
-
-#Colores
-#                       borde   backgr  texto   borde_salida
-client.focused          #222d32 #222d32 #b8c2c6 #20c4d9
-client.urgent           #5a1f1e #5a1f1e #cc9393
-client.focused_inactive #222d32 #222d32 #999999
-client.unfocused        #222d32e5 #222d32e5 #444d54 
-
-# mouse
-focus_follows_mouse no 
-
-# Focus wrapping
-# force_focus_wrapping yes
-
-# popup en modo pantalla completa
-# popup_during_fullscreen smart
-
-# retrasar urgencia
-force_display_urgency_hint 500 ms
-
-# scratchpad
-bindsym $mod+minus scratchpad show
-bindsym $mod+Shift+minus move scratchpad
-
-# APPLICATIONS
-bindsym $mod+e exec nautilus
-bindsym $mod+c $exec xcalc
-
-# MPD MPC
-bindsym Mod1+less $exec mpc prev
-bindsym Mod1+greater $exec mpc next
-bindsym Mod1+XF86AudioMute $exec mpc toggle
-bindsym Mod1+XF86AudioRaiseVolume $exec mpc volume +5
-bindsym Mod1+XF86AudioLowerVolume $exec mpc volume -5
-
-# SCREENSHOT
-bindsym --release Print $exec flameshot gui
-# bindsym --release Print $exec $DOTFILES/scripts/screenshot -e 'xdg-open $f'
-# bindsym --release $mod+Print $exec $DOTFILES/scripts/screenshot -m select -e 'xdg-open $f'
-# bindsym --release $mod+Shift+Print $exec $DOTFILES/scripts/screenshot -m focused -e 'xdg-open $f'
-
-# VOLUME
-bindsym XF86AudioRaiseVolume $exec $DOTFILES/scripts/volume up
-bindsym XF86AudioLowerVolume $exec $DOTFILES/scripts/volume down
-bindsym XF86AudioMute $exec $DOTFILES/scripts/volume toggle
-
-# BRIGHTNESS
-bindsym XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness up
-bindsym XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness down
-bindsym $mod+XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness full
-bindsym $mod+XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness off
-
-bindsym $mod+Right workspace next_on_output
-bindsym $mod+Left workspace prev_on_output
-
-floating_minimum_size 220 x 90
-floating_maximum_size -1 x -1
-
-bindsym $mod+space $exec rofi -show combi

@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# ~/.xprofile
+
+export DOTFILES=$HOME/.DOTFILES
+export EDITOR=/usr/bin/nvim
+export PATH="${PATH}:$HOME/.bin"
+# export SSH_ASKPASS=ssh-askpass
+
+nm-applet &
+redshift -l -16.3988:-71.5369 &
+$DOTFILES/scripts/chromecast_wallpaper.py start &
+
+# AUTOSTART
+[ -f $DOTFILES/$WM/autostart ] && . $DOTFILES/$WM/autostart
