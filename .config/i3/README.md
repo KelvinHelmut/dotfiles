@@ -1,10 +1,10 @@
 # i3
 
-![i3](../screenshots/i3.png)
+![i3](../../screenshots/i3.png)
 
 ## Bar 
 
-![i3](../screenshots/i3_bar.png)
+![i3](../../screenshots/i3_bar.png)
 
 ## Atajos de teclado
 

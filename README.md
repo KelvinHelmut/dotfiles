@@ -35,7 +35,7 @@ Configuración para el inicio automático del gestor de ventanas al iniciar sesi
 
 #### Scripts
 
-Se encuentran en `~/.local/bin` [Ver](./local/bin)
+Se encuentran en `~/.local/bin` [Ver](./.local/bin)
 
 ##### volume
 `$ volume [up|down|toggle]`
@@ -101,7 +101,7 @@ flameshot | screenshot | `$ pacman -S flameshot`
 
 ![nvim](./screenshots/nvim.png)
 
-[Ver más](./nvim/README.md)
+[Ver más](./.config/nvim/)
 
 ### Fonts
 
