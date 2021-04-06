@@ -27,19 +27,19 @@ bindsym --release Print $exec flameshot gui
 bindsym --release $mod+Print $exec sleep 3 && flameshot gui
 
 # volume
-bindsym XF86AudioRaiseVolume $exec $DOTFILES/scripts/volume up
-bindsym XF86AudioLowerVolume $exec $DOTFILES/scripts/volume down
-bindsym XF86AudioMute $exec $DOTFILES/scripts/volume toggle
+bindsym XF86AudioRaiseVolume $exec volume up
+bindsym XF86AudioLowerVolume $exec volume down
+bindsym XF86AudioMute $exec volume toggle
 
 # brightness
-bindsym XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness up
-bindsym XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness down
-bindsym $mod+XF86MonBrightnessUp $exec $DOTFILES/scripts/brightness full
-bindsym $mod+XF86MonBrightnessDown $exec $DOTFILES/scripts/brightness off
+bindsym XF86MonBrightnessUp $exec brightness up
+bindsym XF86MonBrightnessDown $exec brightness down
+bindsym $mod+XF86MonBrightnessUp $exec brightness full
+bindsym $mod+XF86MonBrightnessDown $exec brightness off
 
 # chromecast wallpaper
-bindsym $mod+w $exec $DOTFILES/scripts/chromecast_wallpaper.py next
-bindsym $mod+Shift+w $exec $DOTFILES/scripts/chromecast_wallpaper.py prev
+bindsym $mod+w $exec chromecast_wallpaper.py next
+bindsym $mod+Shift+w $exec chromecast_wallpaper.py prev
 
 # change focus
 bindsym $mod+$left focus left

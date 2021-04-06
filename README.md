@@ -2,13 +2,17 @@
 
 ![enviroment](./screenshots/enviroment.png)
 
+Copiar las configuraciones en sus respectivas ubicaciones en `$HOME`, o ejecutar `setup.sh` para
+hacerlo de manera automática, generando backup de las configuraciones existentes y creando enlaces
+a las nuevas configuraciones, si no quiere hacer backup ejecutar `setup.sh --nobackup`
+
 ## Window manager
 
 ### i3
 
 ![i3](./screenshots/i3.png)
 
-[Ver más](./i3/README.md)
+[Ver más](./.config/i3/)
 
 #### X11
 
@@ -22,25 +26,39 @@ Configuraciones de inicio generales. [Ver](./.xprofile)
 
 ##### $WM/autostart
 
-Configuraciones de inicio especificos para `$WM (i3 | qtile | awesome | otro)`. [Ver](./i3/autostart)
+Configuraciones de inicio especificos para `$WM (i3 | qtile | awesome | otro)`. [Ver](./.config/i3/autostart)
 
 ##### ~/.zprofile
 
 Configuración para el inicio automático del gestor de ventanas al iniciar sesión. [Ver](./.zprofile)
 > Si usa bash cambiar el nombre a ~/.bash_profile
 
+#### Scripts
+
+Se encuentran en `~/.local/bin` [Ver](./local/bin)
+
+##### volume
+`$ volume [up|down|toggle]`
+
+##### brightness
+`$ brightness [up|down|full|off]`
+
+##### chromecast_wallpaper.py ([Gist](https://gist.github.com/KelvinHelmut/1f0413337ad91620e3e7ba1e4553ca5d))
+`$ chromecast_wallpaper.py [start|prev|next|stop|standalone]`
+
+
 ## Terminal
 
 ![tmux](./screenshots/tmux.png)
 
-##### Alacritty
-```
-$ pacman -S alacritty
-```
-
 ##### Tmux
 ```
 $ pacman -S tmux
+```
+
+##### Alacritty
+```
+$ pacman -S alacritty
 ```
 
 ##### Zsh
@@ -72,8 +90,10 @@ yay | gestor de paquetes | [Github](https://github.com/Jguer/yay)
 nm-applet | net | `$ pacman -S nm-applet`
 picom | compositor | `$ pacman -S picom`
 redshift | screen | `$ pacman -S redshift`
-xclip | clipboard | `$ pacman -S xclip`
 hsetroot | set wallpaper | `$ pacman -S hsetroot`
+xbacklight | brightness | `$ pacman -S xorg-xbacklight`
+amixer | audio (ALSA) | `$ pacman -S alsa-utils`
+xclip | clipboard | `$ pacman -S xclip`
 [chromecast_wallpaper](https://gist.github.com/KelvinHelmut/1f0413337ad91620e3e7ba1e4553ca5d) | wallpaper | [Gist](https://gist.github.com/KelvinHelmut/1f0413337ad91620e3e7ba1e4553ca5d)
 flameshot | screenshot | `$ pacman -S flameshot`
 

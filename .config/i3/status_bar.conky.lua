@@ -1,4 +1,4 @@
--- conky status bar
+-- ~/.config/i3/status_bar.conky.lua
 
 local net_interface = 'wlp9s0'
 local cpu_id = 'cpu0'

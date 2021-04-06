@@ -1,4 +1,6 @@
 #! /bin/sh 
+#
+# ~/.config/i3/status_bar.sh
 
 # Send the header so that i3bar knows we want to use JSON:
 echo '{"version":1}'
@@ -10,4 +12,4 @@ echo '['
 echo '[],'
 
 # Now send blocks with information forever:
-exec conky -c $DOTFILES/i3/status_bar.conky.lua
+exec conky -c  ~/.config/i3/status_bar.conky.lua

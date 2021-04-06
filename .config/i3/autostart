@@ -1,0 +1,7 @@
+#! /bin/sh
+#
+# ~/.config/i3/autostart
+
+hsetroot -solid '#101010' -fill ~/.config/i3/background &
+picom &
+rofi -show combi &

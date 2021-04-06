@@ -1,5 +1,0 @@
-#! /bin/sh
-
-hsetroot -solid '#101010' -fill $DOTFILES/i3/background &
-picom &
-rofi -show combi &
