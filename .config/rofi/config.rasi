@@ -1,6 +1,5 @@
 /* Rofi config file */
 configuration {
-    lines: 12;
     font: "mononoki Nerd Font 12";
     show-icons: true;
     theme: "slate";

@@ -1,7 +1,6 @@
 configuration {
     modi: "combi,window,calc,run";
     combi-modi: "drun,window,run,calc,ssh";
-    lines: 4;
     window-format: "[{w}] :: {c} :: {t}";
     
     display-window: "";
@@ -43,6 +42,8 @@ entry {
 }
 
 listview {
+  lines: 4;
+  columns: 1;
   cycle: false;
   margin: 0 0 -1px 0;
   scrollbar: false;
@@ -53,14 +54,24 @@ element {
   padding: 16px;
 }
 
-element selected {
-  background-color: #2e343fdd;
-}
-
 element-icon {
-  size: 2.2ch;
+  background-color: transparent;
+  /* numix circle */
+  /* size: 2.2ch; */
+  /* tela circle */
+  size: 3.4ch;
+  margin: 1px 0 0 -5px;
 }
 
 element-text {
   margin: 1px 0 0 8px;
+  background-color: transparent;
+}
+
+element selected {
+  background-color: #2e343fdd;
+}
+
+element-text selected {
+  text-color: #cfe4ee;
 }
