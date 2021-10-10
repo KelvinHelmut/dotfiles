@@ -110,16 +110,6 @@ set $WS7 7:<span font='8' rise='1000'>7 </span><span fgcolor='#b50000' font='11'
 set $WS8 8:<span font='8' rise='1000'>8 </span><span fgcolor='white' font='11'> </span>
 set $WS9 9:<span font='8' rise='2000'>9 </span><span fgcolor='#06b300' font='12'>阮 </span>
 set $WS0 10:<span font='8' rise='2000'>10 </span><span fgcolor='#c700d1' font='12'>聆 </span>
-# set $WS1 "1"
-# set $WS2 "2"
-# set $WS3 "3"
-# set $WS4 "4"
-# set $WS5 "5"
-# set $WS6 "6"
-# set $WS7 "7"
-# set $WS8 "8"
-# set $WS9 "9"
-# set $WS0 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -156,18 +146,18 @@ bindsym $mod+Escape workspace back_and_forth
 # layout mode for containers
 workspace_layout tabbed
 
-assign [instance="Navigator|chromium|google-chrome"] $WS2
+assign [instance="Navigator|chromium|google-chrome|brave-browser"] $WS2
 assign [class=".*Nautilus|File-roller"] $WS3
 assign [class="code-oss"] $WS4
 assign [class="DBeaver|GitKraken"] $WS5
 assign [class="Java" window_type="splash"] $WS5
-assign [class="Wps|Wpp|Et|Latexila"] $WS6
+assign [class="wps|wpp|et|Latexila"] $WS6
+assign [instance="wpspdf"] $WS6
 assign [class="Gimp"] $WS7
 assign [class="JDownloader"] $WS8
-assign [class="Spotify"] $WS9
-assign [instance="spotify"] $WS9
 assign [class="Slack"] $WS0
 
+for_window [class="Spotify"] move --no-auto-back-and-forth container to workspace $WS9
 for_window [window_role="task_dialog|app|bubble|pop-up|page-info|Preferences"] floating enable; move absolute center
 for_window [window_type="dialog|menu"] floating enable
 for_window [class="mplayer2|MPlayer|Lxappearance|Gpicview"] floating enable
