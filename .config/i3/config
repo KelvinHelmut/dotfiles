@@ -63,8 +63,8 @@ bindsym Mod1+k resize shrink height 10px or 10ppt
 bindsym Mod1+l resize grow width 10px or 10ppt
 
 # split in horizontal/vertical orientation
-bindsym $mod+Control+Right split horizontal
-bindsym $mod+Control+Down split vertical
+bindsym $mod+Control+h split horizontal
+bindsym $mod+Control+v split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -141,6 +141,10 @@ bindsym $mod+Left workspace prev_on_output
 
 # focus last focused workspace
 bindsym $mod+Escape workspace back_and_forth
+
+# move focused workspace to screen
+bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Control+Left move workspace to output left
 
 
 # layout mode for containers
