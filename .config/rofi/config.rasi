@@ -1,6 +1,6 @@
-/* Rofi config file */
+@theme "slate"
+
 configuration {
     font: "mononoki Nerd Font 12";
     show-icons: true;
-    theme: "slate";
 }
