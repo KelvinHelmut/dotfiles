@@ -25,8 +25,12 @@ set iskeyword+=-                      	" Treat dash separated words as a word te
 set formatoptions-=cro                  " Stop newline continution of comments
 set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set t_Co=256                            " Support 256 colors
-set colorcolumn=101
+set colorcolumn=121
+set ignorecase
+set smartcase
+set mousemoveevent
 
 filetype on
 filetype indent on
 filetype plugin on
+
