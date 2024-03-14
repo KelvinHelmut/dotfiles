@@ -53,7 +53,7 @@ class ChromecastWallpaper():
 
     @stubborn
     def refresh_wallpapers(self):
-        request = urllib.request.Request(ChromecastWallpaper.CHROMECAST_HOME)
+        request = urllib.request.Request(ChromecastWallpaper.CHROMECAST_HOME.replace('https', 'http'))
         response = urllib.request.urlopen(request)
         data = response.read().decode('utf-8')
         text = re.search("JSON\.parse\('(.+?)'\)\)\.", data).group(1)
@@ -83,7 +83,7 @@ class ChromecastWallpaper():
     def change_wallpaper(self, index):
         self.current_wallpaper = index
         wallpaper = self.get_current_wallpaper()
-        urllib.request.urlretrieve(wallpaper['url'], '/tmp/wallpaper')
+        urllib.request.urlretrieve(wallpaper['url'].replace('https', 'http'), '/tmp/wallpaper')
         subprocess.run(['hsetroot', '-solid', '#101010',  '-fill', '/tmp/wallpaper', '-tint', '#ccc'])
 
     def get_current_wallpaper(self):
@@ -91,7 +91,7 @@ class ChromecastWallpaper():
 
 
 class ChromecastWallpaperSocket():
-    SERVER_ADDRESS = ('127.0.0.1', 9876)
+    SERVER_ADDRESS = ('127.0.0.1', 56789)
 
     def __init__(self, chromecast_wallpaper):
         self.chromecast_wallpaper = chromecast_wallpaper
